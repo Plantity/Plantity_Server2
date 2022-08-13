@@ -1,6 +1,6 @@
 package com.plantity.server.controller;
 
-import com.plantity.server.domain.Users;
+import com.plantity.server.domain.users.Users;
 import com.plantity.server.repository.UsersRepository;
 import com.plantity.server.service.UsersService;
 import lombok.RequiredArgsConstructor;
