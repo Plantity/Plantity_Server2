@@ -1,5 +1,6 @@
 package com.plantity.server.domain;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
