@@ -18,8 +18,8 @@ public class PlantLog {
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "plantLog", fetch = FetchType.LAZY)
-    private MyPlant myPlant;
+    //@OneToOne(mappedBy = "plantLog", fetch = FetchType.LAZY)
+    //private MyPlant myPlant;
 
     @Embedded
     private Log log;
