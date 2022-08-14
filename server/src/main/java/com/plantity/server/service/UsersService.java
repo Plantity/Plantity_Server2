@@ -1,7 +1,7 @@
 package com.plantity.server.service;
 
-import com.plantity.server.domain.Users;
-import com.plantity.server.domain.UsersRequestDto;
+import com.plantity.server.domain.users.Users;
+import com.plantity.server.domain.users.UsersRequestDto;
 import com.plantity.server.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

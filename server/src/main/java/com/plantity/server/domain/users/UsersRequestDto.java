@@ -1,4 +1,4 @@
-package com.plantity.server.domain;
+package com.plantity.server.domain.users;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
