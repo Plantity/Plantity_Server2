@@ -1,6 +1,6 @@
 package com.plantity.server.controller;
 
-import com.plantity.server.domain.PlantFollowingDto;
+import com.plantity.server.domain.plantFollowing.PlantFollowingDto;
 import com.plantity.server.service.PlantFollowingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

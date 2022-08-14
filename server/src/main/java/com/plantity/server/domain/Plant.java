@@ -1,5 +1,6 @@
 package com.plantity.server.domain;
 
+import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import lombok.Getter;
 
 import javax.persistence.*;

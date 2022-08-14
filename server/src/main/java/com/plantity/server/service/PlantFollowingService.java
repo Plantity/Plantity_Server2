@@ -1,20 +1,14 @@
 package com.plantity.server.service;
 
 
-import com.plantity.server.domain.Plant;
-import com.plantity.server.domain.PlantFollowing;
-import com.plantity.server.domain.PlantFollowingDto;
+import com.plantity.server.domain.plantFollowing.PlantFollowing;
+import com.plantity.server.domain.plantFollowing.PlantFollowingDto;
 import com.plantity.server.domain.Users;
 import com.plantity.server.repository.PlantFollowingRepository;
 import com.plantity.server.repository.PlantRepository;
 import com.plantity.server.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.util.Optional;
