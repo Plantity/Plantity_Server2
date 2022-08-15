@@ -8,14 +8,14 @@ import javax.persistence.Embeddable;
 @Getter
 public class Log {
 
-    private int water;
-    private int look;
-    private int sun;
-    private int repot;
+    private boolean water;
+    private boolean look;
+    private boolean sun;
+    private boolean repot;
 
     protected Log() {}
 
-    public Log(int water, int look, int sun, int repot) {
+    public Log(boolean water, boolean look, boolean sun, boolean repot) {
         this.water = water;
         this.look = look;
         this.sun = sun;

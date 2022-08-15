@@ -1,19 +1,20 @@
 package com.plantity.server.domain.users;
 
 
+import com.plantity.server.domain.BaseTimeEntity;
+import com.plantity.server.domain.myPlant.MyPlant;
+import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Entity
 @Getter
-public class Users {
+public class Users extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
@@ -24,30 +25,10 @@ public class Users {
     private int score;
     private String status;
 
-    private List<PlantFollowing> plantFollowings;
+    @OneToMany(mappedBy = "users")
+    private List<MyPlant> myPlant = new ArrayList<MyPlant>();
 
-    public Users(String nickName, String social, String rating, int score, String status){
-        this.nickName = nickName;
-        this.social = social;
-        this.rating = rating;
-        this.score = score;
-        this.status = status;
+    @OneToMany(mappedBy = "users")
+    private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
 
-    }
-
-    public Users(UsersRequestDto userRequestDto){
-        this.nickName = userRequestDto.getNickName();
-        this.social = userRequestDto.getSocial();
-        this.rating = userRequestDto.getRating();
-        this.score = userRequestDto.getScore();
-        this.status = userRequestDto.getStatus();
-    }
-
-    public void updateUser(UsersRequestDto userRequestDto){
-        this.nickName = userRequestDto.getNickName();
-        this.social = userRequestDto.getSocial();
-        this.rating = userRequestDto.getRating();
-        this.score = userRequestDto.getScore();
-        this.status = userRequestDto.getStatus();
-    }
 }

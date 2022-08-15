@@ -17,13 +17,4 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
-	/*
-	@Bean
-	public CommandLineRunner demo(UsersRepository userRepository, UsersService userService){
-		return (args) -> {
-			userRepository.save(new Users("nickname1", "social1", "rating1", 1, "status1"));
-		};
-	}
-
-	 */
 }

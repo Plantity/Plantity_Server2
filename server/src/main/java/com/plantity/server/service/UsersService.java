@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsersService {
     private final UsersRepository userRepository;
 
+    /*
     @Transactional
     public Long updateUser(Long id, UsersRequestDto userRequestDto){
         Users user = userRepository.findById(id).orElseThrow(
@@ -21,4 +22,6 @@ public class UsersService {
         user.updateUser(userRequestDto);
         return user.getUserId();
     }
+
+     */
 }
