@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 public class PlantFollowingService {
 
+    /*
     private final PlantFollowingRepository plantFollowingRepository;
     private final UsersRepository usersRepository;
     private final PlantRepository plantRepository;
@@ -66,4 +67,10 @@ public class PlantFollowingService {
 //        plantFollowingService.plantUnfollow(plantFollowingDto);
 //        return new ResponseEntity<>(plantFollowingDto, HttpStatus.OK);
 //    }
+}
+
+
+
+
+     */
 }
