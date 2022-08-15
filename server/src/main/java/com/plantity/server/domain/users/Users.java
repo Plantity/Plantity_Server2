@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -22,6 +23,8 @@ public class Users {
     private String rating;
     private int score;
     private String status;
+
+    private List<PlantFollowing> plantFollowings;
 
     public Users(String nickName, String social, String rating, int score, String status){
         this.nickName = nickName;
