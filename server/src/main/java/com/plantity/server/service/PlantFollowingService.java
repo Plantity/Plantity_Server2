@@ -3,7 +3,7 @@ package com.plantity.server.service;
 
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import com.plantity.server.domain.plantFollowing.PlantFollowingDto;
-import com.plantity.server.domain.Users;
+import com.plantity.server.domain.users.Users;
 import com.plantity.server.repository.PlantFollowingRepository;
 import com.plantity.server.repository.PlantRepository;
 import com.plantity.server.repository.UsersRepository;

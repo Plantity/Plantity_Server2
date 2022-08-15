@@ -1,7 +1,7 @@
 package com.plantity.server.repository;
 
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
-import com.plantity.server.domain.Users;
+import com.plantity.server.domain.users.Users;
 
 import java.util.Optional;
 
