@@ -25,7 +25,7 @@ public class Plant {
     private String ignSeasonCodeNm; // 개화 시기
     private String flclrCodeNm; // 꽃 색
 
-    @OneToMany(mappedBy = "plantId")
+    @OneToMany(mappedBy = "plant")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
 
     /*

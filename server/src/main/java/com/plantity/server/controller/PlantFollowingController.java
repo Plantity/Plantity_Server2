@@ -18,6 +18,7 @@ import java.io.IOException;
 @RequestMapping("/plantFollowing")
 public class PlantFollowingController {
 
+    /*
     private final PlantFollowingService plantFollowingService;
 
     @PostMapping
@@ -31,4 +32,6 @@ public class PlantFollowingController {
         plantFollowingService.plantUnfollowing(plantFollowingDto);
         return new ResponseEntity<>(plantFollowingDto, HttpStatus.OK);
     }
+
+     */
 }
