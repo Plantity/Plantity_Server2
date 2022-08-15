@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 public class PlantLog extends BaseTimeEntity {
+@NoArgsConstructor
+@Entity
+@Getter
+public class PlantLog {
     // Order(MyPlant, 주테이블) - Delivery(PlantLog, 대상테이블) 관계
 
     @Id @GeneratedValue
@@ -27,10 +31,24 @@ public class PlantLog extends BaseTimeEntity {
     private Log log;
 
     /*
+    private String test;
+
     public PlantLog(String test){
         this.test = test;
     }
 
      */
 
+    /*
+    @Id @GeneratedValue
+    @Column(name = "updatedAt")
+    private LocalDateTime updatedAt;
+
+    @OneToOne(mappedBy = "plantLog", fetch = FetchType.LAZY)
+    private MyPlant myPlant;
+
+    @Embedded
+    private Log log;
+
+     */
 }
