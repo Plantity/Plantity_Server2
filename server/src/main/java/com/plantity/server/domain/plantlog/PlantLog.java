@@ -1,5 +1,6 @@
 package com.plantity.server.domain.plantlog;
 
+import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+
+
+@Getter
+@NoArgsConstructor
+@Entity
+public class PlantLog extends BaseTimeEntity {
 @NoArgsConstructor
 @Entity
 @Getter
@@ -16,11 +23,21 @@ public class PlantLog {
     @Id @GeneratedValue
     private Long plantId;
 
+    //private String test;
+
+    //private MyPlant myPlant;
+
+    @Embedded
+    private Log log;
+
+    /*
     private String test;
 
     public PlantLog(String test){
         this.test = test;
     }
+
+     */
 
     /*
     @Id @GeneratedValue
