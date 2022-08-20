@@ -1,4 +1,4 @@
-package com.plantity.server.domain;
+package com.plantity.server.domain.plant;
 
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import com.plantity.server.domain.users.Users;

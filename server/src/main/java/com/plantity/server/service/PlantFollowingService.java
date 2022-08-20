@@ -1,17 +1,8 @@
 package com.plantity.server.service;
 
 
-import com.plantity.server.domain.plantFollowing.PlantFollowing;
-import com.plantity.server.domain.plantFollowing.PlantFollowingDto;
-import com.plantity.server.domain.users.Users;
-import com.plantity.server.repository.PlantFollowingRepository;
-import com.plantity.server.repository.PlantRepository;
-import com.plantity.server.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service

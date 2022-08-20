@@ -1,13 +1,11 @@
 package com.plantity.server.domain.plantFollowing;
 
 import com.plantity.server.domain.BaseTimeEntity;
-import com.plantity.server.domain.Plant;
+import com.plantity.server.domain.plant.Plant;
 import com.plantity.server.domain.users.Users;
 import lombok.Getter;
-import lombok.NonNull;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="plantFollowing")
