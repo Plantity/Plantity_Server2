@@ -1,17 +1,15 @@
-package com.plantity.server.domain.plant;
+package com.plantity.server.domain.plant.detail;
 
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
-import com.plantity.server.domain.users.Users;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
-public class Plant {
+public class PlantDetail {
 
     @Id @GeneratedValue
     private Long plantIdx; //식물 번호
@@ -27,6 +25,16 @@ public class Plant {
 
     @OneToMany(mappedBy = "plant")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
+
+    public PlantDetail(String plntbneNm, String plntzrNm, String adviseInfo, String orgplceInfo, String lighttdemanddoCodeNm, String ignSeasonCodeNm, String flclrCodeNm) {
+        this.plntbneNm = plntbneNm;
+        this.plntzrNm = plntzrNm;
+        this.adviseInfo = adviseInfo;
+        this.orgplceInfo = orgplceInfo;
+        this.lighttdemanddoCodeNm = lighttdemanddoCodeNm;
+        this.ignSeasonCodeNm = ignSeasonCodeNm;
+        this.flclrCodeNm = flclrCodeNm;
+    }
 
     /*
     public void addFollowingPlant(PlantFollowing plantFollowing) {

@@ -1,7 +1,9 @@
 package com.plantity.server.controller;
 
-import com.plantity.server.domain.plant.PlantList;
-import com.plantity.server.domain.plant.PlantListResponseDto;
+import com.plantity.server.domain.plant.detail.PlantDetail;
+import com.plantity.server.domain.plant.list.PlantList;
+import com.plantity.server.domain.plant.list.PlantListResponseDto;
+import com.plantity.server.repository.PlantDetailRepository;
 import com.plantity.server.repository.PlantListRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ import java.util.List;
 public class PlantController {
     private final PlantLogRepository plantLogRepository;
     private final PlantListRepository plantListRepository;
+    private final PlantDetailRepository plantDetailRepository;
 
     // 실내용 식물 목록 저장
     @ResponseBody
@@ -55,32 +58,57 @@ public class PlantController {
         for(Element element : item){
             String cntntsNo = element.getChildText("cntntsNo");
             String cntntsSj = element.getChildText("cntntsSj");
-            String rtnFileSeCode = element.getChildText("rtnFileSeCode");
-            String rtnFileSn = element.getChildText("rtnFileSn");
-            String rtnOrginlFileNm = element.getChildText("rtnOrginlFileNm");
-            String rtnStreFileNm = element.getChildText("rtnStreFileNm");
-            String rtnFileCours = element.getChildText("rtnFileCours");
-            String rtnImageDc = element.getChildText("rtnImageDc");
-            String rtnThumbFileNm = element.getChildText("rtnThumbFileNm");
-            String rtnImgSeCode = element.getChildText("rtnImgSeCode");
 
-            /*
-            PlantListResponseDto vo = new PlantListResponseDto(cntntsNo, cntntsSj, rtnFileSeCode,
-                    rtnFileSn, rtnOrginlFileNm, rtnStreFileNm, rtnFileCours, rtnImageDc, rtnThumbFileNm, rtnImgSeCode);
-            */
             PlantListResponseDto vo = new PlantListResponseDto(cntntsNo, cntntsSj);
             PlantList pl = new PlantList(vo);
-
-            System.out.println("ar = " + vo.getCntntsNo());
-
             plantListRepository.save(pl);
-
-
             ar[i++] = vo;
         }
         return "success";
     }
 
+    // 실내 정원용 식물 상세
+    @ResponseBody
+    @GetMapping("/api/plantList/detail")
+    public String apiCallPlantListDetail(@RequestParam String apiKey, @RequestParam int cntntsNo) throws IOException, JDOMException{
+        StringBuilder sb = new StringBuilder("http://api.nongsaro.go.kr/service/garden/gardenDtl?");
 
+        sb.append("apiKey=" + apiKey);
+        sb.append("&cntntsNo=" + cntntsNo);
+
+        URL url = new URL(sb.toString());
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestProperty("Content-Type", "application/xml");;
+        connection.setRequestMethod("GET");
+        connection.connect();
+
+        SAXBuilder builder = new SAXBuilder();
+        Document document = builder.build(connection.getInputStream());
+
+        Element root = document.getRootElement();
+        Element body = root.getChild("body");
+        List<Element> item = body.getChildren("item");
+
+        PlantDetail[] ar = new PlantDetail[item.size()];
+        int i = 0;
+        for(Element element: item){
+            String plntbneNm = element.getChildText("plntbneNm");
+            String plntzrNm = element.getChildText("plntzrNm");
+            String adviseInfo = element.getChildText("adviseInfo");
+            String orgplceInfo = element.getChildText("orgplceInfo");
+            String lighttdemanddoCodeNm = element.getChildText("lighttdemanddoCodeNm");
+            String ignSeasonCodeNm = element.getChildText("ignSeasonCodeNm");
+            String flclrCodeNm = element.getChildText("flclrCodeNm");
+
+            PlantDetail vo = new PlantDetail(plntbneNm, plntzrNm, adviseInfo, orgplceInfo, lighttdemanddoCodeNm, ignSeasonCodeNm, flclrCodeNm);
+            plantDetailRepository.save(vo);
+
+            ar[i++] = vo;
+        }
+
+
+        return "success";
+    }
 
 }
