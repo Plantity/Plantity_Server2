@@ -1,4 +1,4 @@
-package com.plantity.server.domain.plant;
+package com.plantity.server.domain.plant.list;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,15 +25,4 @@ public class PlantList {
         this.cntntsSj = plantListResponseDto.getCntntsSj();
 
     }
-    /*
-    private String rtnFileSeCode;
-    private String rtnFileSn;
-    private String rtnOrginlFileNm;
-    private String rtnStreFileNm;
-    private String rtnFileCours;
-    private String rtnImageDc;
-    private String rtnThumbFileNm;
-    private String rtnImgSeCode;
-
-     */
 }
