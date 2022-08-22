@@ -1,5 +1,6 @@
 package com.plantity.server.domain.plant.detail;
 
+import com.plantity.server.domain.plant.list.PlantList;
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import lombok.Getter;
 
@@ -24,6 +25,9 @@ public class PlantDetail {
     private String flclrCodeNm; // 꽃 색
     private String watercycleSprngCodeNm; // 물주기
     private String managelevelCode; // 관리수준 코드 - 난이도
+
+    @OneToOne
+    private PlantList plantList;
 
 
     @OneToMany(mappedBy = "plant")

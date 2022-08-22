@@ -1,5 +1,6 @@
 package com.plantity.server.domain.plant.list;
 
+import com.plantity.server.domain.plant.detail.PlantDetail;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,9 @@ public class PlantList {
 
     private String cntntsNo;
     private String cntntsSj;
+
+    @OneToOne(mappedBy = "plantList")
+    private PlantDetail plantDetail;
 
     public PlantList(PlantListResponseDto plantListResponseDto){
         this.cntntsNo = plantListResponseDto.getCntntsNo();
