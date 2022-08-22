@@ -17,18 +17,19 @@ import java.util.List;
 public class Users extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private Long userId; //회원 id
 
-    private String nickName;
-    private String social;
-    private String rating;
-    private int score;
-    private String status;
+    private String nickName; // 회원 닉네임
+    private String social; // 소셜로그인
+    private String rating; // 회원 등급
+    private int score; // 점수
+    private String status; // 회원 상태
 
     @OneToMany(mappedBy = "users")
     private List<MyPlant> myPlant = new ArrayList<MyPlant>();
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
+
 
 }

@@ -1,4 +1,4 @@
-package com.plantity.server.domain;
+package com.plantity.server.domain.Plant;
 
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import com.plantity.server.domain.users.Users;
@@ -28,11 +28,5 @@ public class Plant {
     @OneToMany(mappedBy = "plant")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
 
-    /*
-    public void addFollowingPlant(PlantFollowing plantFollowing) {
-        plantFollowing.add();
-    }
-
-     */
 
 }

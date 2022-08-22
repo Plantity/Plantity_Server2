@@ -1,15 +1,13 @@
 package com.plantity.server.controller;
 
+import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import com.plantity.server.domain.plantFollowing.PlantFollowingDto;
 import com.plantity.server.service.PlantFollowingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -18,20 +16,22 @@ import java.io.IOException;
 @RequestMapping("/plantFollowing")
 public class PlantFollowingController {
 
-    /*
+
     private final PlantFollowingService plantFollowingService;
 
-    @PostMapping
-    public ResponseEntity<PlantFollowingDto> plantFollowing(@RequestBody PlantFollowingDto plantFollowingDto) throws IOException {
-        plantFollowingService.plantFollowing(plantFollowingDto);
-        return new ResponseEntity<>(plantFollowingDto, HttpStatus.CREATED);
-    }
+//    //북마크
+//    @PostMapping
+//    public ResponseEntity<PlantFollowingDto> follow(@RequestBody PlantFollowingDto heartDto) {
+//        PlantFollowingService.follow(heartDto);
+//        return new ResponseEntity<>(heartDto, HttpStatus.CREATED);
+//    }
+//
+//    //북마크취소
+//    @DeleteMapping
+//    public ResponseEntity<PlantFollowingDto> unFollow(@RequestBody PlantFollowingDto plantFollowingDto) throws IOException {
+//        plantFollowingService.unFollow(plantFollowingDto);
+//        return new ResponseEntity<>(plantFollowingDto, HttpStatus.OK);
+//    }
 
-    @DeleteMapping
-    public ResponseEntity<PlantFollowingDto> plantUnfollowing(@RequestBody PlantFollowingDto plantFollowingDto) throws IOException {
-        plantFollowingService.plantUnfollowing(plantFollowingDto);
-        return new ResponseEntity<>(plantFollowingDto, HttpStatus.OK);
-    }
 
-     */
 }
