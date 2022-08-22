@@ -3,10 +3,7 @@ package com.plantity.server.domain.plant.list;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
@@ -15,7 +12,7 @@ public class PlantList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long plantListId;
+    private int plantListId;
 
     private String cntntsNo;
     private String cntntsSj;
