@@ -2,11 +2,13 @@ package com.plantity.server.domain.plant.detail;
 
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @Entity
 @Getter
 public class PlantDetail {

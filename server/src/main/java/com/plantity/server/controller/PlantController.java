@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -103,5 +104,10 @@ public class PlantController {
         return "success";
     }
 
+    // 식물 목록 조회 api
+    @GetMapping("/plant")
+    public List<PlantDetail> getPlantDetailList(){
+        return plantDetailRepository.findAll();
+    }
 
 }
