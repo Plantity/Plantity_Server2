@@ -1,10 +1,7 @@
 package com.plantity.server.controller;
 
 import com.plantity.server.domain.plant.detail.PlantDetail;
-import com.plantity.server.domain.plant.list.PlantList;
-import com.plantity.server.domain.plant.list.PlantListResponseDto;
 import com.plantity.server.repository.PlantDetailRepository;
-import com.plantity.server.repository.PlantListRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import com.plantity.server.service.PlantService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlantController {
     private final PlantLogRepository plantLogRepository;
-    private final PlantListRepository plantListRepository;
     private final PlantService plantService;
     private final PlantDetailRepository plantDetailRepository;
 
@@ -58,76 +54,54 @@ public class PlantController {
             Element items = body.getChild("items");
             List<Element> item = items.getChildren("item");
 
-
-            PlantListResponseDto[] ar = new PlantListResponseDto[item.size()];
-
-            int i = 0;
             for(Element element : item){
                 String cntntsNo = element.getChildText("cntntsNo");
                 String cntntsSj = element.getChildText("cntntsSj");
 
-                PlantListResponseDto vo = new PlantListResponseDto(cntntsNo, cntntsSj);
-                PlantList pl = new PlantList(vo);
-                plantListRepository.save(pl);
-                ar[i++] = vo;
+                StringBuilder sb2 = new StringBuilder("http://api.nongsaro.go.kr/service/garden/gardenDtl?");
+
+                sb2.append("apiKey=" + apiKey);
+                sb2.append("&cntntsNo=" + cntntsNo);
+
+                URL url2 = new URL(sb2.toString());
+                HttpURLConnection connection2 = (HttpURLConnection) url2.openConnection();
+
+                connection2.setRequestProperty("Content-Type", "application/xml");;
+                connection2.setRequestMethod("GET");
+                connection2.connect();
+
+                SAXBuilder builder2 = new SAXBuilder();
+                Document document2 = builder2.build(connection2.getInputStream());
+
+                Element root2 = document2.getRootElement();
+                Element body2 = root2.getChild("body");
+                List<Element> item2 = body2.getChildren("item");
+
+                PlantDetail[] ar = new PlantDetail[item2.size()];
+                int l = 0;
+                for(Element element2: item2){
+                    String plntbneNm = element2.getChildText("plntbneNm");
+                    String plntzrNm = element2.getChildText("plntzrNm");
+                    String adviseInfo = element2.getChildText("adviseInfo");
+                    String orgplceInfo = element2.getChildText("orgplceInfo");
+                    String lighttdemanddoCodeNm = element2.getChildText("lighttdemanddoCodeNm");
+                    String ignSeasonCodeNm = element2.getChildText("ignSeasonCodeNm");
+                    String flclrCodeNm = element2.getChildText("flclrCodeNm");
+                    String watercycleSprngCodeNm = element2.getChildText("watercycleSprngCodeNm");
+                    String managelevelCode = element2.getChildText("managelevelCode");
+
+                    PlantDetail vo = new PlantDetail(cntntsNo, cntntsSj, plntbneNm, plntzrNm, adviseInfo,
+                            orgplceInfo, lighttdemanddoCodeNm, ignSeasonCodeNm, flclrCodeNm, watercycleSprngCodeNm, managelevelCode);
+                    plantDetailRepository.save(vo);
+
+                    ar[l++] = vo;
+                }
+
             }
         }
 
         return "success";
     }
 
-
-    // 실내 정원용 식물 상세
-    @ResponseBody
-    @GetMapping("/api/plantList/detail")
-    public String apiCallPlantListDetail(@RequestParam String apiKey) throws IOException, JDOMException{
-
-        for(int j = 1; j <= plantListRepository.count(); j++){
-            StringBuilder sb = new StringBuilder("http://api.nongsaro.go.kr/service/garden/gardenDtl?");
-
-            String cntntsNo = plantService.getPlantListById(j).getCntntsNo();
-
-            sb.append("apiKey=" + apiKey);
-            sb.append("&cntntsNo=" + cntntsNo);
-
-            URL url = new URL(sb.toString());
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestProperty("Content-Type", "application/xml");;
-            connection.setRequestMethod("GET");
-            connection.connect();
-
-            SAXBuilder builder = new SAXBuilder();
-            Document document = builder.build(connection.getInputStream());
-
-            Element root = document.getRootElement();
-            Element body = root.getChild("body");
-            List<Element> item = body.getChildren("item");
-
-            PlantDetail[] ar = new PlantDetail[item.size()];
-            int i = 0;
-            for(Element element: item){
-                String cntntsNo2 = element.getChildText("cntntsNo");
-                String plntbneNm = element.getChildText("plntbneNm");
-                String plntzrNm = element.getChildText("plntzrNm");
-                String adviseInfo = element.getChildText("adviseInfo");
-                String orgplceInfo = element.getChildText("orgplceInfo");
-                String lighttdemanddoCodeNm = element.getChildText("lighttdemanddoCodeNm");
-                String ignSeasonCodeNm = element.getChildText("ignSeasonCodeNm");
-                String flclrCodeNm = element.getChildText("flclrCodeNm");
-                String watercycleSprngCodeNm = element.getChildText("watercycleSprngCodeNm");
-                String managelevelCode = element.getChildText("managelevelCode");
-
-                PlantDetail vo = new PlantDetail(cntntsNo2, plntbneNm, plntzrNm, adviseInfo,
-                        orgplceInfo, lighttdemanddoCodeNm, ignSeasonCodeNm, flclrCodeNm, watercycleSprngCodeNm, managelevelCode);
-                plantDetailRepository.save(vo);
-
-                ar[i++] = vo;
-            }
-        }
-
-
-        return "success";
-    }
 
 }

@@ -1,6 +1,5 @@
 package com.plantity.server.domain.plant.detail;
 
-import com.plantity.server.domain.plant.list.PlantList;
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
 import lombok.Getter;
 
@@ -16,6 +15,7 @@ public class PlantDetail {
     private int plantIdx; //식물 번호
 
     private String cntntsNo;
+    private String cntntsSj;
     private String plntbneNm; // 학명(식물명)
     private String plntzrNm; // 영문명
     private String adviseInfo; // 식물설명
@@ -26,18 +26,15 @@ public class PlantDetail {
     private String watercycleSprngCodeNm; // 물주기
     private String managelevelCode; // 관리수준 코드 - 난이도
 
-    @OneToOne
-    private PlantList plantList;
-
-
     @OneToMany(mappedBy = "plant")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
 
-    public PlantDetail(String cntntsNo, String plntbneNm, String plntzrNm,
+    public PlantDetail(String cntntsNo, String cntntsSj, String plntbneNm, String plntzrNm,
                        String adviseInfo, String orgplceInfo, String lighttdemanddoCodeNm,
                        String ignSeasonCodeNm, String flclrCodeNm,
                        String watercycleSprngCodeNm, String managelevelCode) {
         this.cntntsNo = cntntsNo;
+        this.cntntsSj = cntntsSj;
         this.plntbneNm = plntbneNm;
         this.plntzrNm = plntzrNm;
         this.adviseInfo = adviseInfo;
