@@ -2,6 +2,7 @@ package com.plantity.server.domain.plantlog;
 
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,10 @@ public class PlantLog extends BaseTimeEntity {
 
     @Embedded
     private Log log;
+
+    @Builder
+    public PlantLog(MyPlant myPlant, Log log) {
+        this.myPlant = myPlant;
+        this.log = log;
+    }
 }
