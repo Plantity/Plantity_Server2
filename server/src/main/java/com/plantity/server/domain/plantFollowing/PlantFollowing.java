@@ -1,13 +1,11 @@
 package com.plantity.server.domain.plantFollowing;
 
 import com.plantity.server.domain.BaseTimeEntity;
-import com.plantity.server.domain.Plant;
+import com.plantity.server.domain.plant.detail.PlantDetail;
 import com.plantity.server.domain.users.Users;
 import lombok.Getter;
-import lombok.NonNull;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="plantFollowing")
@@ -23,7 +21,7 @@ public class PlantFollowing extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="plantIdx")
-    private Plant plant; // 찜한 식물 번호
+    private PlantDetail plant; // 찜한 식물 번호
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userId")
