@@ -3,6 +3,7 @@ package com.plantity.server.domain.myPlant;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.plantlog.PlantLog;
 import com.plantity.server.domain.users.Users;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,4 +34,14 @@ public class MyPlant extends BaseTimeEntity {
     private String content;
     private String plantImage;
     private String status;
+
+    @Builder
+    public MyPlant(String plantName, String plantType, int level, String content, String plantImage, String status) {
+        this.plantName = plantName;
+        this.plantType = plantType;
+        this.level = level;
+        this.content = content;
+        this.plantImage = plantImage;
+        this.status = status;
+    }
 }
