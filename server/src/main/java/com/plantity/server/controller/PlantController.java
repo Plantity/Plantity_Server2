@@ -1,5 +1,7 @@
 package com.plantity.server.controller;
 
+import com.plantity.server.config.BaseException;
+import com.plantity.server.config.BaseResponse2;
 import com.plantity.server.domain.plant.detail.PlantDetail;
 import com.plantity.server.repository.PlantDetailRepository;
 import com.plantity.server.repository.PlantLogRepository;
@@ -107,9 +109,9 @@ public class PlantController {
 
     // 식물 목록 조회 api
     @GetMapping("/plant")
-    public Page<PlantDetail> getPlantDetailList(@RequestParam int page, @RequestParam int size){
+    public BaseResponse2<Page<PlantDetail>> getPlantDetailList(@RequestParam int page, @RequestParam int size){
         PageRequest pageRequest = PageRequest.of(page,size);
-        return plantDetailRepository.findAll(pageRequest);
+        return new BaseResponse2<>(plantDetailRepository.findAll(pageRequest));
     }
 
 }
