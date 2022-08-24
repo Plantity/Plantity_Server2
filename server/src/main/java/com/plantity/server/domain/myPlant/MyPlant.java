@@ -1,13 +1,17 @@
 package com.plantity.server.domain.myPlant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.plantlog.PlantLog;
 import com.plantity.server.domain.users.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +19,7 @@ import java.util.List;
 @Entity
 @Getter
 public class MyPlant extends BaseTimeEntity {
+    //식물이름, 타입, 이미지, 입양날짜
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long myPlantId;
@@ -28,20 +33,18 @@ public class MyPlant extends BaseTimeEntity {
     @OneToMany(mappedBy = "myPlant")
     private List<PlantLog> plantLog = new ArrayList<PlantLog>();
 
-    private String plantName;
-    private String plantType;
-    private int level;
-    private String content;
-    private String plantImage;
-    private String status;
+    private String plantName;  //식물이름
+    private String plantType;  //식물타입
+    private String plantImage; //식물이미지
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate plantAdaptTime; //식물입양날짜
 
     @Builder
-    public MyPlant(String plantName, String plantType, int level, String content, String plantImage, String status) {
+    public MyPlant(String plantName, String plantType, String plantImage, LocalDate plantAdaptTime) {
         this.plantName = plantName;
         this.plantType = plantType;
-        this.level = level;
-        this.content = content;
         this.plantImage = plantImage;
-        this.status = status;
+        this.plantAdaptTime = plantAdaptTime;
     }
 }
