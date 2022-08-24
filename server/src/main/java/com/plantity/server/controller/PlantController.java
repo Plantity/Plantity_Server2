@@ -9,6 +9,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -106,8 +107,9 @@ public class PlantController {
 
     // 식물 목록 조회 api
     @GetMapping("/plant")
-    public List<PlantDetail> getPlantDetailList(){
-        return plantDetailRepository.findAll();
+    public Page<PlantDetail> getPlantDetailList(@RequestParam int page, @RequestParam int size){
+        PageRequest pageRequest = PageRequest.of(page,size);
+        return plantDetailRepository.findAll(pageRequest);
     }
 
 }
