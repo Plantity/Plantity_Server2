@@ -20,7 +20,13 @@ public class PlantLogService {
 
     @Transactional
     public Long sunUpdate(Long id, PlantLogSaveRequestDto requestDto) {
-        PlantLog plantLogs = plantLogRepository.findAllById(id)
+        PlantLog plantLogs = plantLogRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("로그를 업데이트할 식물이 없습니다. id=" + id));
+
+        boolean sunupdate = requestDto.getLog().isSun();
+
+        plantLogs.update(sunupdate);
+
+        return id;
     }
 }

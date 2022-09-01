@@ -25,8 +25,13 @@ public class PlantLog extends BaseTimeEntity {
     @Embedded
     private Log log;
 
+    public void update(Log log) {
+        this.log = log;
+    }
+
     @Builder
-    public PlantLog(MyPlant myPlant, Log log) {
+    public PlantLog(Long plantId, MyPlant myPlant, Log log) {
+        this.plantId = plantId;
         this.myPlant = myPlant;
         this.log = log;
     }
