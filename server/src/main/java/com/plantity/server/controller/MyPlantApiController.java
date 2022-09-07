@@ -27,7 +27,7 @@ public class MyPlantApiController {
     @PostMapping("/save")
     public ResponseEntity<MyPlantSaveResponse> save(@RequestBody MyPlantSaveRequestDto requestDto) {
 
-        if (requestDto.getPlantName() == null | requestDto.getPlantType() == null | requestDto.getLevel() == 0) {
+        if (requestDto.getPlantName() == null | requestDto.getPlantType() == null) {
             throw new CustomException(ExceptionCode.NO_REQUIRED_PARAMETER);
         }
 

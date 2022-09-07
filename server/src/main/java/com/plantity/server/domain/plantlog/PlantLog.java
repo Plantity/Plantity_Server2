@@ -3,6 +3,7 @@ package com.plantity.server.domain.plantlog;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
