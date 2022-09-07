@@ -1,5 +1,6 @@
 package com.plantity.server.domain.plantlog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
 import lombok.Builder;
@@ -20,14 +21,13 @@ public class PlantLog extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "myPlantId")
+    @JsonIgnore
     private MyPlant myPlant;
 
     @Embedded
     private Log log;
 
-    @Builder
-    public PlantLog(MyPlant myPlant, Log log) {
-        this.myPlant = myPlant;
-        this.log = log;
+    public void updateRepot(Boolean repot){
+        log.updateRepot(repot);
     }
 }
