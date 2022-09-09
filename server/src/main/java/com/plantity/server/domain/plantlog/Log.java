@@ -25,4 +25,8 @@ public class Log {
     public void updateSun(Boolean sun) {
         this.sun = sun;
     }
+    
+    public void updateRepot(Boolean repot){
+        this.repot = repot;
+    }
 }

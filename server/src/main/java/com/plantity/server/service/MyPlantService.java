@@ -1,5 +1,6 @@
 package com.plantity.server.service;
 
+import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
 import com.plantity.server.domain.plantlog.PlantLog;
 import com.plantity.server.repository.MyPlantRepository;
@@ -26,6 +27,15 @@ public class MyPlantService {
                 () -> new IllegalArgumentException("해당 식물이 없습니다.")
         );
         plantLog.updateSun(true);
+        return plantLog.getPlantId();
+    }
+    
+    @Transactional
+    public Long updateRepot(Long userId, Long myPlantId){
+        PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
+                () -> new IllegalArgumentException("해당 식물이 없습니다")
+        );
+        plantLog.updateRepot(true);
         return plantLog.getPlantId();
     }
 }
