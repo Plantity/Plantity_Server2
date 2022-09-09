@@ -4,6 +4,7 @@ package com.plantity.server.domain.users;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.plantFollowing.PlantFollowing;
+import com.plantity.server.domain.plantlog.PlantLog;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,6 +28,9 @@ public class Users extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "users")
     private List<MyPlant> myPlant = new ArrayList<MyPlant>();
+
+    @OneToMany(mappedBy = "users")
+    private List<PlantLog> plantLogs = new ArrayList<>();
 
     @OneToMany(mappedBy = "users")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();

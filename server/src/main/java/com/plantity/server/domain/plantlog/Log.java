@@ -15,14 +15,14 @@ public class Log {
 
     protected Log() {}
 
-    public boolean isSun() {
-        return sun;
-    }
-
     public Log(boolean water, boolean look, boolean sun, boolean repot) {
         this.water = water;
         this.look = look;
         this.sun = sun;
         this.repot = repot;
+    }
+
+    public void updateSun(Boolean sun) {
+        this.sun = sun;
     }
 }

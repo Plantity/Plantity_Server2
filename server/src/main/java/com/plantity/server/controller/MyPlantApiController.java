@@ -5,14 +5,12 @@ import static com.plantity.server.constants.SuccessCode.*;
 import com.plantity.server.constants.ExceptionCode;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
 import com.plantity.server.dto.res.myplant.MyPlantSaveResponse;
+import com.plantity.server.dto.res.myplant.MyPlantUpdateResponse;
 import com.plantity.server.exception.CustomException;
 import com.plantity.server.service.MyPlantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,5 +29,11 @@ public class MyPlantApiController {
         myPlantService.save(requestDto);
 
         return MyPlantSaveResponse.newResponse(CREATE_MYPLANT_SUCCESS);
+    }
+
+    @PutMapping("/sun/{userId}/{myPlantId}")
+    public ResponseEntity<MyPlantUpdateResponse> putSun(@PathVariable Long userId, @PathVariable Long myPlantId) {
+        myPlantService.updateSun(userId, myPlantId);
+        return MyPlantUpdateResponse.newResponse(UPDATE_SUNPLANTLOG_SUCCESS);
     }
 }

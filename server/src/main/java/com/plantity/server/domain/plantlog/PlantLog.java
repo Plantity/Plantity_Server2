@@ -2,6 +2,7 @@ package com.plantity.server.domain.plantlog;
 
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
+import com.plantity.server.domain.users.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,11 @@ public class PlantLog extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long plantId;
 
+    //userId
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private Users users;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "myPlantId")
     private MyPlant myPlant;
@@ -33,6 +39,7 @@ public class PlantLog extends BaseTimeEntity {
         this.log = log;
     }
 
-    public void update(boolean sunupdate) {
+    public void updateSun(Boolean sun) {
+        log.updateSun(sun);
     }
 }
