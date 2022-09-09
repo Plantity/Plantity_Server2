@@ -29,4 +29,13 @@ public class MyPlantService {
         plantLog.updateRepot(true);
         return plantLog.getPlantId();
     }
+
+    @Transactional
+    public Long updateSun(Long userId, Long myPlantId) {
+        PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
+                () -> new IllegalArgumentException("해당 식물이 없습니다.")
+        );
+        
+        return plantLog.getPlantId();
+    }
 }
