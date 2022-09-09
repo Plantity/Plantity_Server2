@@ -22,6 +22,15 @@ public class MyPlantService {
     }
 
     @Transactional
+    public Long updateSun(Long userId, Long myPlantId) {
+        PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
+                () -> new IllegalArgumentException("해당 식물이 없습니다.")
+        );
+        plantLog.updateSun(true);
+        return plantLog.getPlantId();
+    }
+    
+    @Transactional
     public Long updateRepot(Long userId, Long myPlantId){
         PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
                 () -> new IllegalArgumentException("해당 식물이 없습니다")

@@ -28,8 +28,10 @@ public class PlantDetail {
     private String watercycleSprngCodeNm; // 물주기
     private String managelevelCode; // 관리수준 코드 - 난이도
 
+    /*
     @OneToMany(mappedBy = "plant")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
+    */
 
     public PlantDetail(String cntntsNo, String cntntsSj, String plntbneNm, String plntzrNm,
                        String adviseInfo, String orgplceInfo, String lighttdemanddoCodeNm,
