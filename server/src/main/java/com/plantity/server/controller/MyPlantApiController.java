@@ -42,6 +42,7 @@ public class MyPlantApiController {
     public ResponseEntity<MyPlantUpdateResponse> putSun(@PathVariable Long userId, @PathVariable Long myPlantId) {
         myPlantService.updateSun(userId, myPlantId);
         return MyPlantUpdateResponse.newResponse(UPDATE_SUNPLANTLOG_SUCCESS);
+    }
 
     @PutMapping("/repot/{userId}/{myPlantId}")
     public BaseResponse2<String> putRepot(@PathVariable Long userId, @PathVariable Long myPlantId){
