@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 public class PlantLogUpdateRequestDto {
 
     private Long plantId;
-    private MyPlant myPlant;
+    private PlantLog plantLog;
     private Log log;
 
     @Builder
-    public PlantLogUpdateRequestDto(MyPlant myPlant, Log log) {
-        this.log.updateSun(true);
+    public PlantLogUpdateRequestDto(PlantLog plantLog, Log log) {
+        this.plantLog = plantLog;
+        this.log = log;
     }
 }

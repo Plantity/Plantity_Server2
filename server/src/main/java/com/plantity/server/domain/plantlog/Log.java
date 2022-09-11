@@ -22,6 +22,7 @@ public class Log {
         this.repot = repot;
     }
 
+
     public void updateSun(Boolean sun) {
         this.sun = sun;
     }
