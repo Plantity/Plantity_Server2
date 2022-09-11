@@ -3,6 +3,7 @@ package com.plantity.server.service;
 import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
 import com.plantity.server.domain.plantlog.PlantLog;
+import com.plantity.server.domain.plantlog.PlantLogSaveRequestDto;
 import com.plantity.server.repository.MyPlantRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import lombok.RequiredArgsConstructor;
