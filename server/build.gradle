@@ -27,6 +27,12 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.jdom', name: 'jdom2', version: '2.0.6.1'
+
+	//aws
+	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.3.1'
+
+	//file
+	implementation 'commons-io:commons-io:2.11.0'
   
 	//JUnit4 추가
 	testImplementation("org.junit.vintage:junit-vintage-engine") {

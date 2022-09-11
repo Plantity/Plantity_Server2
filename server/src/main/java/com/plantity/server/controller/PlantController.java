@@ -114,4 +114,5 @@ public class PlantController {
         return new BaseResponse2<>(plantDetailRepository.findAll(pageRequest));
     }
 
+
 }
