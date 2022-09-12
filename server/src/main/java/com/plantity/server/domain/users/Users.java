@@ -21,10 +21,10 @@ public class Users extends BaseTimeEntity {
     private Long userId;
 
     private String nickName;
-    private String social;
+    //private String social;
     private String rating;
     private int score;
-    private String status;
+    //private String status;
 
     @OneToMany(mappedBy = "users")
     private List<MyPlant> myPlant = new ArrayList<MyPlant>();
@@ -38,10 +38,18 @@ public class Users extends BaseTimeEntity {
     public Users(Users users){
         this.userId = users.userId;
         this.nickName = users.nickName;
-        this.social = users.social;
+        //this.social = users.social;
         this.rating = users.rating;
         this.score = users.score;
-        this.status = users.status;
+       // this.status = users.status;
+    }
+
+    public Users(UsersRequestDto usersRequestDto){
+        this.nickName = usersRequestDto.getNickName();
+        //this.social = usersRequestDto.getSocial();
+        this.rating = usersRequestDto.getRating();
+        this.score = usersRequestDto.getScore();
+        //this.status = usersRequestDto.getStatus();
     }
 
 }
