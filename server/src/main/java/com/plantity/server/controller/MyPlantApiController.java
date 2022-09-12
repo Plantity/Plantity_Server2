@@ -87,6 +87,18 @@ public class MyPlantApiController {
         return new BaseResponse2("success");
     }
 
+    @PutMapping("/water/{userId}/{myPlantId}")
+    public ResponseEntity<MyPlantUpdateResponse> putWater(@PathVariable Long userId, @PathVariable Long myPlantId) {
+        myPlantService.updateWater(userId, myPlantId);
+        return MyPlantUpdateResponse.newResponse(UPDATE_WATERPLANTLOG_SUCCESS);
+    }
+
+    @PutMapping("look/{userId}/{myPlantId}")
+    public ResponseEntity<MyPlantUpdateResponse> putLook(@PathVariable Long userId, @PathVariable Long myPlantId) {
+        myPlantService.updateLook(userId, myPlantId);
+        return MyPlantUpdateResponse.newResponse(UPDATE_LOOKPLANTLOG_SUCCESS);
+    }
+
     @GetMapping("/plant")
     public List<PlantLog> check(){
         return plantLogRepository.findAll();

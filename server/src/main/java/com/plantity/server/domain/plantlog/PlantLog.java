@@ -47,4 +47,12 @@ public class PlantLog extends BaseTimeEntity {
     public void updateSun(Boolean sun) {
         log.updateSun(sun);
     }
+
+    public void updateWater(Boolean water) {
+        log.updateWater(water);
+    }
+
+    public void updateLook(Boolean look) {
+        log.updateLook(look);
+    }
 }
