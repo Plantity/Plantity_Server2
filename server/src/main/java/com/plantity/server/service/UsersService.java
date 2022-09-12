@@ -2,6 +2,7 @@ package com.plantity.server.service;
 
 import com.plantity.server.domain.users.Users;
 import com.plantity.server.domain.users.UsersRequestDto;
+import com.plantity.server.domain.users.UsersResponseDto;
 import com.plantity.server.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,13 @@ public class UsersService {
     }
 
      */
+
+    public UsersResponseDto userInfo(UsersRequestDto requestDto) {
+        Users users = userRepository.findById(requestDto.getUserId()).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저가 없습니다.")
+        );
+
+        return UsersResponseDto.from(users);
+
+    }
 }

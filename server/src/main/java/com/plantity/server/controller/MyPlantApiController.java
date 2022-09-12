@@ -99,7 +99,6 @@ public class MyPlantApiController {
         return MyPlantUpdateResponse.newResponse(UPDATE_LOOKPLANTLOG_SUCCESS);
     }
 
-    // 오류 해결 - https://velog.io/@youns1121/JPA-java.lang.IllegalStateException-Cannot-call-sendError-after-the-response-has-been-committed
     @GetMapping("/plant/{userId}")
     public List<MyPlant> check(@PathVariable Long userId) {
         usersRepository.findByUserId(userId);
