@@ -30,4 +30,8 @@ public class Log {
     public void updateRepot(Boolean repot){
         this.repot = repot;
     }
+
+    public void updateWater(Boolean water) { this.water = water; }
+
+    public void updateLook(Boolean look) { this.look = look; }
 }

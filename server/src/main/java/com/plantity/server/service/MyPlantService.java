@@ -32,11 +32,29 @@ public class MyPlantService {
     }
     
     @Transactional
-    public Long updateRepot(Long userId, Long myPlantId){
+    public Long updateRepot(Long userId, Long myPlantId) {
         PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
                 () -> new IllegalArgumentException("해당 식물이 없습니다")
         );
         plantLog.updateRepot(true);
+        return plantLog.getPlantId();
+    }
+
+    @Transactional
+    public Long updateWater(Long userId, Long myPlantId) {
+        PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
+                () -> new IllegalArgumentException("해당 식물이 없습니다.")
+        );
+        plantLog.updateWater(true);
+        return plantLog.getPlantId();
+    }
+
+    @Transactional
+    public Long updateLook(Long userId, Long myPlantId) {
+        PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
+                () -> new IllegalArgumentException("해당 식물이 없습니다.")
+        );
+        plantLog.updateLook(true);
         return plantLog.getPlantId();
     }
 }
