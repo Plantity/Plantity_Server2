@@ -9,17 +9,17 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class UsersRequestDto {
     private String nickName;
-    private String social;
+    //private String social;
     private String rating;
     private int score;
-    private String status;
+    //private String status;
 
     public UsersRequestDto(String nickName, String social, String rating, int score, String status){
         this.nickName = nickName;
-        this.social = social;
+        //this.social = social;
         this.rating = rating;
         this.score = score;
-        this.status = status;
+        //this.status = status;
 
     }
 
