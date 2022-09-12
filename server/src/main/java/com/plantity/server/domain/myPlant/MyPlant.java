@@ -35,16 +35,16 @@ public class MyPlant extends BaseTimeEntity {
 
     private String plantName;  //식물이름
     private String plantType;  //식물타입
-    private String plantImage; //식물이미지
+    private String filePath;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate plantAdaptTime; //식물입양날짜
 
     @Builder
-    public MyPlant(String plantName, String plantType, String plantImage, LocalDate plantAdaptTime) {
+    public MyPlant(String plantName, LocalDate plantAdaptTime, String plantType, String filePath ) {
         this.plantName = plantName;
         this.plantType = plantType;
-        this.plantImage = plantImage;
+        this.filePath = filePath;
         this.plantAdaptTime = plantAdaptTime;
     }
 }
