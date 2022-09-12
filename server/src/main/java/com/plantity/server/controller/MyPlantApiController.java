@@ -8,10 +8,12 @@ import com.plantity.server.config.BaseResponse2;
 import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
 import com.plantity.server.domain.plantlog.PlantLog;
+import com.plantity.server.domain.users.Users;
 import com.plantity.server.dto.res.myplant.MyPlantSaveResponse;
 import com.plantity.server.dto.res.myplant.MyPlantUpdateResponse;
 import com.plantity.server.repository.MyPlantRepository;
 import com.plantity.server.repository.PlantLogRepository;
+import com.plantity.server.repository.UsersRepository;
 import com.plantity.server.service.MyPlantService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -35,6 +37,7 @@ public class MyPlantApiController {
     private final MyPlantService myPlantService;
     private final PlantLogRepository plantLogRepository;
     private final MyPlantRepository myPlantRepository;
+    private final UsersRepository usersRepository;
 
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
@@ -59,8 +62,9 @@ public class MyPlantApiController {
                 throw new CustomException(ExceptionCode.NO_REQUIRED_PARAMETER);
             }
              */
+            Users users1  = new Users(usersRepository.findByUserId(1L));
 
-            MyPlant myPlant = new MyPlant(amazonS3.getUrl(bucket, filePath).toString(), myPlantSaveRequestDto.getPlantAdaptTime(), myPlantSaveRequestDto.getPlantName(), myPlantSaveRequestDto.getPlantType());
+            MyPlant myPlant = new MyPlant(amazonS3.getUrl(bucket, filePath).toString(), myPlantSaveRequestDto.getPlantAdaptTime(), myPlantSaveRequestDto.getPlantName(), myPlantSaveRequestDto.getPlantType(),users1);
 
             //myPlantService.save(myPlantSaveRequestDto);
             myPlantRepository.save(myPlant);
