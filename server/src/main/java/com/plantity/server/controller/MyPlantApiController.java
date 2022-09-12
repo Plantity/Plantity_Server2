@@ -42,8 +42,8 @@ public class MyPlantApiController {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
-    @PostMapping("/save")
-    public ResponseEntity<MyPlantSaveResponse> save(@RequestPart(value="image", required=false)  MultipartFile multipartFile,@RequestPart(value = "myPlantSaveRequestDto") MyPlantSaveRequestDto myPlantSaveRequestDto) throws IOException {
+    @PostMapping("/save/{userId}")
+    public ResponseEntity<MyPlantSaveResponse> save(@RequestPart(value="image", required=false)  MultipartFile multipartFile,@RequestPart(value = "myPlantSaveRequestDto") MyPlantSaveRequestDto myPlantSaveRequestDto, @PathVariable Long userId) throws IOException {
         try{
             String oriFileName = multipartFile.getOriginalFilename();
             String fileName = oriFileName;
@@ -62,7 +62,7 @@ public class MyPlantApiController {
                 throw new CustomException(ExceptionCode.NO_REQUIRED_PARAMETER);
             }
              */
-            Users users1  = new Users(usersRepository.findByUserId(1L));
+            Users users1  = new Users(usersRepository.findByUserId(userId));
 
             MyPlant myPlant = new MyPlant(amazonS3.getUrl(bucket, filePath).toString(), myPlantSaveRequestDto.getPlantAdaptTime(), myPlantSaveRequestDto.getPlantName(), myPlantSaveRequestDto.getPlantType(),users1);
 
