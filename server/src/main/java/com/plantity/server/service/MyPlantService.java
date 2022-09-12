@@ -16,10 +16,13 @@ public class MyPlantService {
     private final MyPlantRepository myPlantRepository;
     private final PlantLogRepository plantLogRepository;
 
+    /*
     @Transactional
     public Long save(MyPlantSaveRequestDto requestDto) {
         return myPlantRepository.save(requestDto.toEntity()).getMyPlantId();
     }
+
+     */
 
     @Transactional
     public Long updateSun(Long userId, Long myPlantId) {

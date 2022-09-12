@@ -35,4 +35,13 @@ public class Users extends BaseTimeEntity {
     @OneToMany(mappedBy = "users")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
 
+    public Users(Users users){
+        this.userId = users.userId;
+        this.nickName = users.nickName;
+        this.social = users.social;
+        this.rating = users.rating;
+        this.score = users.score;
+        this.status = users.status;
+    }
+
 }
