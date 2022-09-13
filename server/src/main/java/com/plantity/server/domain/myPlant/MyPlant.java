@@ -1,6 +1,8 @@
 package com.plantity.server.domain.myPlant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.plantlog.PlantLog;
 import com.plantity.server.domain.users.Users;

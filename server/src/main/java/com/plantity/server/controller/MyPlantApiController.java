@@ -99,8 +99,9 @@ public class MyPlantApiController {
         return MyPlantUpdateResponse.newResponse(UPDATE_LOOKPLANTLOG_SUCCESS);
     }
 
-    @GetMapping("/plant")
-    public List<PlantLog> check(){
-        return plantLogRepository.findAll();
+    @GetMapping("/plant/{userId}")
+    public List<MyPlant> check(@PathVariable Long userId) {
+        usersRepository.findByUserId(userId);
+        return myPlantRepository.findAll();
     }
 }

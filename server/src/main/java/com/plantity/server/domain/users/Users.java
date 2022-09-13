@@ -1,6 +1,8 @@
 package com.plantity.server.domain.users;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.plantFollowing.PlantFollowing;

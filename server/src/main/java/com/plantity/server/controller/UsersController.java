@@ -3,15 +3,17 @@ package com.plantity.server.controller;
 import com.plantity.server.config.BaseResponse2;
 import com.plantity.server.domain.users.Users;
 import com.plantity.server.domain.users.UsersRequestDto;
+import com.plantity.server.domain.users.UsersResponseDto;
+import com.plantity.server.dto.res.users.UserResponse;
 import com.plantity.server.repository.UsersRepository;
 import com.plantity.server.service.UsersService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.plantity.server.constants.SuccessCode.USER_INFO_SUCCESS;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +25,17 @@ public class UsersController {
     @GetMapping("/users")
     public List<Users> getUsers(){
         return userRepository.findAll();
+    }
+
+    // user 상세 정보 조회
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
+
+        UsersRequestDto usersRequestDto = UsersRequestDto.of(userId);
+
+        UsersResponseDto usersResponseDto = userService.userInfo(usersRequestDto);
+
+        return UserResponse.newResponse(USER_INFO_SUCCESS, usersResponseDto);
     }
 
     // 임시로 User 추가하기
