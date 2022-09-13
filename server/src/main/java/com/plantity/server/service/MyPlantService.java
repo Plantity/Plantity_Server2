@@ -1,9 +1,9 @@
 package com.plantity.server.service;
 
 import com.plantity.server.domain.myPlant.MyPlant;
-import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
+import com.plantity.server.domain.myPlant.MyPlantRequestDto;
+import com.plantity.server.domain.myPlant.MyPlantResponseDto;
 import com.plantity.server.domain.plantlog.PlantLog;
-import com.plantity.server.domain.plantlog.PlantLogUpdateRequestDto;
 import com.plantity.server.repository.MyPlantRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +24,14 @@ public class MyPlantService {
     }
 
      */
+
+    public MyPlantResponseDto myPlantInfo(MyPlantRequestDto requestDto) {
+        MyPlant myPlant = myPlantRepository.findById(requestDto.getMyPlantId()).orElseThrow(
+                () -> new IllegalArgumentException("해당 식물이 없습니다.")
+        );
+
+        return MyPlantResponseDto.from(myPlant);
+    }
 
     @Transactional
     public Long updateSun(Long userId, Long myPlantId) {
