@@ -19,5 +19,10 @@ public class MyPlantResponse extends BaseResponse {
         this.data = data;
     }
 
-    
+    public static ResponseEntity<MyPlantResponse> newResponse(SuccessCode code, MyPlantResponseDto data) {
+        MyPlantResponse response = new MyPlantResponse(true, code.getMsg(), data);
+        return new ResponseEntity(response, code.getStatus());
+    }
+
+
 }

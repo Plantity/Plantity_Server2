@@ -6,9 +6,12 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.plantity.server.config.BaseResponse2;
 import com.plantity.server.domain.myPlant.MyPlant;
+import com.plantity.server.domain.myPlant.MyPlantRequestDto;
+import com.plantity.server.domain.myPlant.MyPlantResponseDto;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
 import com.plantity.server.domain.plantlog.PlantLog;
 import com.plantity.server.domain.users.Users;
+import com.plantity.server.dto.res.myplant.MyPlantResponse;
 import com.plantity.server.dto.res.myplant.MyPlantSaveResponse;
 import com.plantity.server.dto.res.myplant.MyPlantUpdateResponse;
 import com.plantity.server.repository.MyPlantRepository;
@@ -99,9 +102,14 @@ public class MyPlantApiController {
         return MyPlantUpdateResponse.newResponse(UPDATE_LOOKPLANTLOG_SUCCESS);
     }
 
-    @GetMapping("/plant/{userId}")
-    public List<MyPlant> check(@PathVariable Long userId) {
-        usersRepository.findByUserId(userId);
-        return myPlantRepository.findAll();
+    // myPlant 상세 정보 조회
+    @GetMapping("/plant/{userId}/{myPlantId}")
+    public ResponseEntity<MyPlantResponse> myPlantInfo(@PathVariable Long userId, @PathVariable Long myPlantId) {
+
+        MyPlantRequestDto myPlantRequestDto = MyPlantRequestDto.of(userId, myPlantId);
+
+        MyPlantResponseDto myPlantResponseDto = myPlantService.myPlantInfo(myPlantRequestDto);
+
+        return MyPlantResponse.newResponse(MYPLANT_INFO_SUCCESS, myPlantResponseDto);
     }
 }

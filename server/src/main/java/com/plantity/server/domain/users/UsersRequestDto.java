@@ -16,9 +16,6 @@ public class UsersRequestDto {
 
     private UsersRequestDto(Long userId){
         this.userId = userId;
-        //this.nickName = nickName;
-        //this.rating = rating;
-        //this.score = score;
     }
 
     public static UsersRequestDto of(Long userId) {
