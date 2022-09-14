@@ -50,6 +50,25 @@ public class PlantDetail {
         this.managelevelCode = managelevelCode;
     }
 
+    public PlantDetail(PlantDetail plantDetail) {
+        this.cntntsNo = plantDetail.cntntsNo;
+        this.cntntsSj = plantDetail.cntntsSj;
+        this.plntbneNm = plantDetail.plntbneNm;
+        this.plntzrNm = plantDetail.plntzrNm;
+        this.adviseInfo = plantDetail.adviseInfo;
+        this.orgplceInfo = plantDetail.orgplceInfo;
+        this.lighttdemanddoCodeNm = plantDetail.lighttdemanddoCodeNm;
+        this.ignSeasonCodeNm = plantDetail.ignSeasonCodeNm;
+        this.flclrCodeNm = plantDetail.flclrCodeNm;
+        this.watercycleSprngCodeNm = plantDetail.watercycleSprngCodeNm;
+        this.managelevelCode = plantDetail.managelevelCode;
+    }
+    /*
+    public PlantDetail(PlantDetail byCntntsNo) {
+    }
+
+     */
+
     /*
     public void addFollowingPlant(PlantFollowing plantFollowing) {
         plantFollowing.add();

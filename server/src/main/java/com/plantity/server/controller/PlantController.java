@@ -13,10 +13,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -112,6 +109,14 @@ public class PlantController {
     public BaseResponse2<Page<PlantDetail>> getPlantDetailList(@RequestParam int page, @RequestParam int size){
         PageRequest pageRequest = PageRequest.of(page,size);
         return new BaseResponse2<>(plantDetailRepository.findAll(pageRequest));
+    }
+
+
+    // 특정 식물 상세 api
+    @GetMapping("/plant/{cntntsNo}")
+    public BaseResponse2<PlantDetail> getPlantDetail(@PathVariable String cntntsNo){
+        PlantDetail plantDetail = new PlantDetail(plantDetailRepository.findByCntntsNo(cntntsNo));
+        return new BaseResponse2<>(plantDetail);
     }
 
 
