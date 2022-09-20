@@ -24,12 +24,14 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @RestController
@@ -46,8 +48,12 @@ public class MyPlantApiController {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
-    @PostMapping("/save/{userId}")
-    public ResponseEntity<MyPlantSaveResponse> save(@RequestPart(value="image", required=false)  MultipartFile multipartFile,@RequestPart(value = "myPlantSaveRequestDto") MyPlantSaveRequestDto myPlantSaveRequestDto, @PathVariable Long userId) throws IOException {
+    @PostMapping(value = "/save/{userId}",consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<MyPlantSaveResponse> save(@RequestPart(value="image", required=false)  MultipartFile multipartFile,
+                                                    @RequestPart(value = "plantAdaptTime") LocalDate plantAdaptTime,
+                                                    @RequestPart(value = "plantName") String plantName,
+                                                    @RequestPart(value = "plantType") String plantType,
+                                                    @PathVariable Long userId) throws IOException {
         try{
             String oriFileName = multipartFile.getOriginalFilename();
             String fileName = oriFileName;
@@ -68,9 +74,8 @@ public class MyPlantApiController {
              */
             Users users1  = new Users(usersRepository.findByUserId(userId));
 
-            MyPlant myPlant = new MyPlant(amazonS3.getUrl(bucket, filePath).toString(), myPlantSaveRequestDto.getPlantAdaptTime(), myPlantSaveRequestDto.getPlantName(), myPlantSaveRequestDto.getPlantType(),users1);
+            MyPlant myPlant = new MyPlant(amazonS3.getUrl(bucket, filePath).toString(), plantAdaptTime, plantName, plantType,users1);
 
-            //myPlantService.save(myPlantSaveRequestDto);
             myPlantRepository.save(myPlant);
         }catch (Exception exception){
             logger.error("Error!", exception);
