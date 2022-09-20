@@ -22,6 +22,20 @@ public class Log {
         this.repot = repot;
     }
 
+    public boolean waterInfo(Boolean water) {
+        return this.water = water;
+    }
+    public boolean lookInfo(Boolean look) {
+        return this.look = look;
+    }
+    public boolean sunInfo(Boolean sun) {
+        return this.sun = sun;
+    }
+    public boolean repotInfo(Boolean repot) {
+        return this.repot = repot;
+    }
+
+
 
     public void updateSun(Boolean sun) {
         this.sun = sun;

@@ -40,6 +40,19 @@ public class PlantLog extends BaseTimeEntity {
         this.log = log;
     }
 
+    public boolean waterInfo(Boolean water) {
+        return log.waterInfo(water);
+    }
+    public boolean lookInfo(Boolean look) {
+        return log.lookInfo(look);
+    }
+    public boolean sunInfo(Boolean sun) {
+        return log.sunInfo(sun);
+    }
+    public boolean repotInfo(Boolean repot) {
+        return log.repotInfo(repot);
+    }
+
     public void updateRepot(Boolean repot){
         log.updateRepot(repot);
     }

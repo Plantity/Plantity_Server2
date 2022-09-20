@@ -10,18 +10,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlantLogSaveRequestDto {
 
+    private Long userId;
     private MyPlant myPlant;
     private Log log;
 
     @Builder
-    public PlantLogSaveRequestDto(MyPlant myPlant, Log log) {
+    public PlantLogSaveRequestDto(Long userId, MyPlant myPlant, Log log) {
 
+        this.userId = userId;
         this.myPlant = myPlant;
         this.log = log;
     }
 
     public PlantLog toEntity() {
         return PlantLog.builder()
+                .plantId(userId)
                 .myPlant(myPlant)
                 .log(log)
                 .build();

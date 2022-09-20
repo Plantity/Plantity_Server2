@@ -9,11 +9,13 @@ import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.myPlant.MyPlantRequestDto;
 import com.plantity.server.domain.myPlant.MyPlantResponseDto;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
-import com.plantity.server.domain.plantlog.PlantLog;
+import com.plantity.server.domain.plantlog.MyPlantLogRequestDto;
+import com.plantity.server.domain.plantlog.MyPlantLogResponseDto;
 import com.plantity.server.domain.users.Users;
 import com.plantity.server.dto.res.myplant.MyPlantResponse;
 import com.plantity.server.dto.res.myplant.MyPlantSaveResponse;
 import com.plantity.server.dto.res.myplant.MyPlantUpdateResponse;
+import com.plantity.server.dto.res.plantlog.PlantLogResponse;
 import com.plantity.server.repository.MyPlantRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import com.plantity.server.repository.UsersRepository;
@@ -28,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -111,5 +112,16 @@ public class MyPlantApiController {
         MyPlantResponseDto myPlantResponseDto = myPlantService.myPlantInfo(myPlantRequestDto);
 
         return MyPlantResponse.newResponse(MYPLANT_INFO_SUCCESS, myPlantResponseDto);
+    }
+
+    // 식물 로그 상세 조회
+    @GetMapping("/plantLog/{userId}/{myPlantId}/{plantLogId}")
+    public ResponseEntity<PlantLogResponse> plantLogInfo(@PathVariable Long userId, @PathVariable Long myPlantId, @PathVariable Long plantLogId) {
+
+        MyPlantLogRequestDto myPlantLogRequestDto = MyPlantLogRequestDto.of(userId, myPlantId, plantLogId);
+
+        MyPlantLogResponseDto myPlantLogResponseDto = myPlantService.plantLogInfo(myPlantLogRequestDto);
+
+        return PlantLogResponse.newResponse(PLANTLOG_INFO_SUCCESS, myPlantLogResponseDto);
     }
 }
