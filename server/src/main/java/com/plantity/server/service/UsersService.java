@@ -197,4 +197,34 @@ public class UsersService {
 
         return id;
     }
+
+    public Boolean isTokenValid(String access_Token){
+        String reqURL = "https://kapi.kakao.com/v1/user/access_token_info";
+        String id = null;
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+
+            System.out.println("결과 : " + result);
+            JsonElement element = JsonParser.parseString(result);
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    
 }
