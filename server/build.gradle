@@ -31,6 +31,7 @@ dependencies {
 
 	//aws
 	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.3.1'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	//file
 	implementation 'commons-io:commons-io:2.11.0'

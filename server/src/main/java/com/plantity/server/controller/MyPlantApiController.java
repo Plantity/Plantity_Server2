@@ -66,7 +66,7 @@ public class MyPlantApiController {
                 throw new CustomException(ExceptionCode.NO_REQUIRED_PARAMETER);
             }
              */
-            Users users1  = new Users(usersRepository.findByUserId(userId));
+            Users users1  = new Users(usersRepository.findBySocial(userId));
 
             MyPlant myPlant = new MyPlant(amazonS3.getUrl(bucket, filePath).toString(), myPlantSaveRequestDto.getPlantAdaptTime(), myPlantSaveRequestDto.getPlantName(), myPlantSaveRequestDto.getPlantType(),users1);
 
