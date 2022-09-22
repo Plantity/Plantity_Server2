@@ -68,7 +68,7 @@ public class MyPlantApiController {
              */
             Users users1  = new Users(usersRepository.findByUserId(userId));
 
-            MyPlant myPlant = new MyPlant(amazonS3.getUrl(bucket, filePath).toString(), myPlantSaveRequestDto.getPlantAdaptTime(), myPlantSaveRequestDto.getPlantName(), myPlantSaveRequestDto.getPlantType(),users1);
+            MyPlant myPlant = new MyPlant(myPlantSaveRequestDto.getPlantName(),myPlantSaveRequestDto.getPlantAdaptTime(),myPlantSaveRequestDto.getPlantType(), amazonS3.getUrl(bucket, filePath).toString(), users1);
 
             //myPlantService.save(myPlantSaveRequestDto);
             myPlantRepository.save(myPlant);
