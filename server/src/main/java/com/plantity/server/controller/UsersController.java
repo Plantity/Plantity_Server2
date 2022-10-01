@@ -8,9 +8,11 @@ import com.plantity.server.dto.res.users.UserResponse;
 import com.plantity.server.repository.UsersRepository;
 import com.plantity.server.service.UsersService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static com.plantity.server.constants.SuccessCode.USER_INFO_SUCCESS;
@@ -53,6 +55,59 @@ public class UsersController {
         // 토큰으로 조회한 user id를 출력함
         String userId = usersService.getUserId(access_Token);
         System.out.println(userId);
+    }
+
+    @PostMapping("/user/signup")
+    public ResponseEntity<HashMap> kakaoJoin(@RequestBody UsersRequestDto.SignupDto socialDto) {
+        HashMap<String, Object> responseMap = new HashMap<>();
+
+        if(!usersService.isTokenValid(socialDto.getSocialToken())){
+            responseMap.put("status", 401);
+            responseMap.put("message", "유효하지 않은 토큰");
+            return new ResponseEntity<>(responseMap, HttpStatus.NOT_FOUND);
+        }
+
+        Users user = usersService.signUp(socialDto);
+
+        responseMap.put("status", 200);
+        responseMap.put("message", "회원가입 성공");
+//        responseMap.put("token", jwtTokenProvider.createToken(user.getEmail(), user.getRoles()));
+        responseMap.put("refresh_token", usersService.issueRefreshToken(user));
+        return new ResponseEntity<HashMap>(responseMap, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/user/signin")
+    public ResponseEntity<HashMap> kakaoLogin(@RequestBody UsersRequestDto.SigninDto socialDto){
+
+        HashMap<String, Object> responseMap = new HashMap<>();
+        Users user = usersService.signIn(socialDto.getSocialType(), socialDto.getSocialToken());
+
+        if(!usersService.isTokenValid(socialDto.getSocialToken())){
+            responseMap.put("status", 401);
+            responseMap.put("message", "유효하지 않은 토큰");
+            return new ResponseEntity<>(responseMap, HttpStatus.NOT_FOUND);
+        }
+
+        if (socialDto.getSocialType().equals("kakao")) {
+            if (user == null) {
+                responseMap.put("status", 404);
+                responseMap.put("message", "회원 정보 없음");
+                return new ResponseEntity<>(responseMap, HttpStatus.NOT_FOUND);
+            }
+            else {
+                responseMap.put("status", 200);
+                responseMap.put("message", "로그인 성공");
+//                responseMap.put("token", jwtTokenProvider.createToken(user.getEmail(), user.getRoles()));
+                responseMap.put("refresh_token", usersService.giveRefreshToken(user));
+                return new ResponseEntity<>(responseMap, HttpStatus.OK);
+            }
+        }
+        else {
+            responseMap.put("status", 401);
+            responseMap.put("message", "소셜 타입 오류");
+            return new ResponseEntity<>(responseMap, HttpStatus.NOT_FOUND);
+        }
     }
 
 //    조회한 내용을 userRepository에 저장

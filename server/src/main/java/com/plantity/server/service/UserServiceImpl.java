@@ -2,8 +2,11 @@ package com.plantity.server.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.plantity.server.config.JwtTokenProvider;
+import com.plantity.server.domain.RefreshToken;
 import com.plantity.server.domain.users.Users;
 import com.plantity.server.domain.users.UsersRequestDto;
+import com.plantity.server.repository.RefreshTokenRepository;
 import com.plantity.server.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -19,6 +22,9 @@ import java.util.Collections;
 @Service
 public class UserServiceImpl implements UsersService {
     private final UsersRepository userRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+
     /*
     @Transactional
     public Long updateUser(Long id, UsersRequestDto userRequestDto){
@@ -170,4 +176,59 @@ public class UserServiceImpl implements UsersService {
         Users user = userRepository.findById(socialId).orElseGet(()->null);
         return user;
     }
+
+
+    @Override
+    public Boolean isTokenValid(String accessToken){
+        String reqURL = "https://kapi.kakao.com/v1/user/access_token_info";
+        String id = null;
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+
+            System.out.println("결과 : " + result);
+            JsonElement element = JsonParser.parseString(result);
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    @Override
+    public Object giveRefreshToken(Users user) {
+        return refreshTokenRepository.findByUserId(user.getUserId()).orElseGet(null).getRefreshToken();
+    }
+
+    @Override
+    public Object issueRefreshToken(Users user) {
+        RefreshToken refreshToken = new RefreshToken(user.getUserId(), jwtTokenProvider.createRefreshToken());
+        refreshTokenRepository.save(refreshToken);
+        return refreshToken.getRefreshToken();
+    }
+
+//    @Override
+//    Object issueRefreshToken(Users user){
+//        RefreshToken refreshToken = new RefreshToken(user.getId(), jwtTokenProvider.createRefreshToken());
+//        refreshTokenRepository.save(refreshToken);
+//        return refreshToken.getRefreshToken();
+//    }
+
+
+//    @Override
+//    Object giveRefreshToken(Users user){
+//        return refreshTokenRepository.findByUserId(user.getId()).orElseGet(null).getRefreshToken();
+//    }
 }
