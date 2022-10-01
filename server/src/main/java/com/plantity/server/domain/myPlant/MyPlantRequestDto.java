@@ -9,15 +9,15 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class MyPlantRequestDto {
 
-    private Long userIdx;
+    private String userIdx;
     private Long myPlantId;
 
-    private MyPlantRequestDto(Long userIdx, Long myPlantId) {
+    private MyPlantRequestDto(String userIdx, Long myPlantId) {
         this.userIdx = userIdx;
         this.myPlantId = myPlantId;
     }
 
-    public static MyPlantRequestDto of(Long userIdx, Long myPlantId) {
+    public static MyPlantRequestDto of(String userIdx, Long myPlantId) {
         return new MyPlantRequestDto(userIdx, myPlantId);
     }
 }

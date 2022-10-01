@@ -38,7 +38,7 @@ public class MyPlant extends BaseTimeEntity {
     private String plantName;  //식물이름
     private String plantType;  //식물타입
     private String filePath;
-    private Long userIdx;
+    private String userIdx;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate plantAdaptTime; //식물입양날짜

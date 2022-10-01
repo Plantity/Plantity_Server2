@@ -12,7 +12,7 @@ public class MyPlantResponseDto {
 
     private String plantName;
     private String filePath;
-    private Long userId;
+    private String userId;
     private PlantLog plantLog;
 
     private MyPlantResponseDto(MyPlant myPlant) {

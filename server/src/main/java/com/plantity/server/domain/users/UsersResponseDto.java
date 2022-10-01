@@ -10,8 +10,10 @@ public class UsersResponseDto {
     private String nickName;
     private String rating;
     private int score;
+    private String social;
 
     private UsersResponseDto(Users users) {
+        this.social = users.getSocial();
         this.nickName = users.getNickName();
         this.rating = users.getRating();
         this.score = users.getScore();

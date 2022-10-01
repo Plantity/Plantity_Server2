@@ -47,7 +47,7 @@ public class MyPlantApiController {
     public String bucket;
 
     @PostMapping("/save/{userId}")
-    public ResponseEntity<MyPlantSaveResponse> save(@RequestPart(value="image", required=false)  MultipartFile multipartFile,@RequestPart(value = "myPlantSaveRequestDto") MyPlantSaveRequestDto myPlantSaveRequestDto, @PathVariable Long userId) throws IOException {
+    public ResponseEntity<MyPlantSaveResponse> save(@RequestPart(value="image", required=false)  MultipartFile multipartFile,@RequestPart(value = "myPlantSaveRequestDto") MyPlantSaveRequestDto myPlantSaveRequestDto, @PathVariable String userId) throws IOException {
         try{
             String oriFileName = multipartFile.getOriginalFilename();
             String fileName = oriFileName;
@@ -80,32 +80,32 @@ public class MyPlantApiController {
     }
 
     @PutMapping("/sun/{userId}/{myPlantId}")
-    public ResponseEntity<MyPlantUpdateResponse> putSun(@PathVariable Long userId, @PathVariable Long myPlantId) {
+    public ResponseEntity<MyPlantUpdateResponse> putSun(@PathVariable String userId, @PathVariable Long myPlantId) {
         myPlantService.updateSun(userId, myPlantId);
         return MyPlantUpdateResponse.newResponse(UPDATE_SUNPLANTLOG_SUCCESS);
     }
 
     @PutMapping("/repot/{userId}/{myPlantId}")
-    public BaseResponse2<String> putRepot(@PathVariable Long userId, @PathVariable Long myPlantId){
+    public BaseResponse2<String> putRepot(@PathVariable String userId, @PathVariable Long myPlantId){
         myPlantService.updateRepot(userId, myPlantId);
         return new BaseResponse2("success");
     }
 
     @PutMapping("/water/{userId}/{myPlantId}")
-    public ResponseEntity<MyPlantUpdateResponse> putWater(@PathVariable Long userId, @PathVariable Long myPlantId) {
+    public ResponseEntity<MyPlantUpdateResponse> putWater(@PathVariable String userId, @PathVariable Long myPlantId) {
         myPlantService.updateWater(userId, myPlantId);
         return MyPlantUpdateResponse.newResponse(UPDATE_WATERPLANTLOG_SUCCESS);
     }
 
     @PutMapping("look/{userId}/{myPlantId}")
-    public ResponseEntity<MyPlantUpdateResponse> putLook(@PathVariable Long userId, @PathVariable Long myPlantId) {
+    public ResponseEntity<MyPlantUpdateResponse> putLook(@PathVariable String userId, @PathVariable Long myPlantId) {
         myPlantService.updateLook(userId, myPlantId);
         return MyPlantUpdateResponse.newResponse(UPDATE_LOOKPLANTLOG_SUCCESS);
     }
 
     // myPlant 상세 정보 조회
     @GetMapping("/plant/{userId}/{myPlantId}")
-    public ResponseEntity<MyPlantResponse> myPlantInfo(@PathVariable Long userId, @PathVariable Long myPlantId) {
+    public ResponseEntity<MyPlantResponse> myPlantInfo(@PathVariable String userId, @PathVariable Long myPlantId) {
 
         MyPlantRequestDto myPlantRequestDto = MyPlantRequestDto.of(userId, myPlantId);
 
@@ -116,7 +116,7 @@ public class MyPlantApiController {
 
     // 식물 로그 상세 조회
     @GetMapping("/plantLog/{userId}/{myPlantId}/{plantLogId}")
-    public ResponseEntity<PlantLogResponse> plantLogInfo(@PathVariable Long userId, @PathVariable Long myPlantId, @PathVariable Long plantLogId) {
+    public ResponseEntity<PlantLogResponse> plantLogInfo(@PathVariable String userId, @PathVariable Long myPlantId, @PathVariable Long plantLogId) {
 
         MyPlantLogRequestDto myPlantLogRequestDto = MyPlantLogRequestDto.of(userId, myPlantId, plantLogId);
 

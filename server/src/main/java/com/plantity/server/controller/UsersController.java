@@ -19,30 +19,48 @@ import static com.plantity.server.constants.SuccessCode.USER_INFO_SUCCESS;
 @RequiredArgsConstructor
 public class UsersController {
     private final UsersRepository userRepository;
-    private final UsersService userService;
+    private final UsersService usersService;
 
-    // user 목록 조회
-    @GetMapping("/users")
-    public List<Users> getUsers(){
-        return userRepository.findAll();
+//    // user 목록 조회
+//    @GetMapping("/users")
+//    public List<Users> getUsers(){
+//        return userRepository.findAll();
+//    }
+//
+//    // user 상세 정보 조회
+//    @GetMapping("/users/{userId}")
+//    public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
+//
+//        UsersRequestDto usersRequestDto = UsersRequestDto.of(userId);
+//
+//        UsersResponseDto usersResponseDto = usersService.userInfo(usersRequestDto);
+//
+//        return UserResponse.newResponse(USER_INFO_SUCCESS, usersResponseDto);
+//    }
+//
+
+
+    @ResponseBody
+    @GetMapping("/login/kakao")
+    public void kakaoCallback(@RequestParam String code) {
+        // kakao 로그인시 발급되는 code
+        // usersService의 getKakaoAccessToken(code)에 인수로 전달 -> accessToken 발급
+        System.out.println("controller code :" + code);
+        String access_Token = usersService.getKakaoAccessToken(code);
+        System.out.println("controller access_token :" + access_Token);
+
+        // getUserID : 발급받은 accessToken으로 kakao에서 유저정보 조회
+        // 토큰으로 조회한 user id를 출력함
+        String userId = usersService.getUserId(access_Token);
+        System.out.println(userId);
     }
 
-    // user 상세 정보 조회
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
-
-        UsersRequestDto usersRequestDto = UsersRequestDto.of(userId);
-
-        UsersResponseDto usersResponseDto = userService.userInfo(usersRequestDto);
-
-        return UserResponse.newResponse(USER_INFO_SUCCESS, usersResponseDto);
-    }
-
-    // 임시로 User 추가하기
-    @PostMapping("/save/test/users")
-    public BaseResponse2<Long> postTestUsers(@RequestBody UsersRequestDto usersRequestDto){
-        Users users = new Users(usersRequestDto);
-        userRepository.save(users);
-        return new BaseResponse2<>(users.getUserId());
-    }
+//    조회한 내용을 userRepository에 저장
+//    임시로 User 추가하기
+//    @PostMapping("/save/test/users")
+//    public BaseResponse2<Long> postTestUsers(@RequestBody UsersRequestDto usersRequestDto){
+//        Users users = new Users(usersRequestDto);
+//        userRepository.save(users);
+//        return new BaseResponse2<>(users.getUserId());
+//    }
 }

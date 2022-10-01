@@ -45,7 +45,7 @@ public class MyPlantService {
     }
 
     @Transactional
-    public Long updateSun(Long userId, Long myPlantId) {
+    public Long updateSun(String userId, Long myPlantId) {
         PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
                 () -> new IllegalArgumentException("해당 식물이 없습니다.")
         );
@@ -54,7 +54,7 @@ public class MyPlantService {
     }
 
     @Transactional
-    public Long updateRepot(Long userId, Long myPlantId) {
+    public Long updateRepot(String userId, Long myPlantId) {
         PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
                 () -> new IllegalArgumentException("해당 식물이 없습니다")
         );
@@ -63,7 +63,7 @@ public class MyPlantService {
     }
 
     @Transactional
-    public Long updateWater(Long userId, Long myPlantId) {
+    public Long updateWater(String userId, Long myPlantId) {
         PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
                 () -> new IllegalArgumentException("해당 식물이 없습니다.")
         );
@@ -72,7 +72,7 @@ public class MyPlantService {
     }
 
     @Transactional
-    public Long updateLook(Long userId, Long myPlantId) {
+    public Long updateLook(String userId, Long myPlantId) {
         PlantLog plantLog = plantLogRepository.findById(myPlantId).orElseThrow(
                 () -> new IllegalArgumentException("해당 식물이 없습니다.")
         );
