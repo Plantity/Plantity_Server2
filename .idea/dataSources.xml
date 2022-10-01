@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@plantity-server.clhr4mydwpui.ap-northeast-2.rds.amazonaws.com" uuid="28536057-4ab7-4678-b31c-f088b8fbf748">
+    <data-source source="LOCAL" name="@plantity-server.clhr4mydwpui.ap-northeast-2.rds.amazonaws.com" uuid="5a52fb9f-6052-4c4f-ba7e-1765fa14608a">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

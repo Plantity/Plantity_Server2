@@ -26,11 +26,8 @@ public class UsersController {
 //    // user 상세 정보 조회
 //    @GetMapping("/users/{userId}")
 //    public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
-//
 //        UsersRequestDto usersRequestDto = UsersRequestDto.of(userId);
-//
 //        UsersResponseDto usersResponseDto = usersService.userInfo(usersRequestDto);
-//
 //        return UserResponse.newResponse(USER_INFO_SUCCESS, usersResponseDto);
 //    }
 //
