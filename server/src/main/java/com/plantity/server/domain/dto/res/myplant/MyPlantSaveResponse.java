@@ -1,8 +1,7 @@
-package com.plantity.server.dto.res.myplant;
+package com.plantity.server.domain.dto.res.myplant;
 
 import com.plantity.server.constants.SuccessCode;
-import com.plantity.server.dto.BaseResponse;
-import com.sun.net.httpserver.Authenticator;
+import com.plantity.server.domain.dto.BaseResponse;
 import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 

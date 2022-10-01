@@ -1,8 +1,7 @@
-package com.plantity.server.dto;
+package com.plantity.server.domain.dto;
 
 import com.plantity.server.constants.ExceptionCode;
 import com.plantity.server.constants.SuccessCode;
-import com.plantity.server.domain.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;

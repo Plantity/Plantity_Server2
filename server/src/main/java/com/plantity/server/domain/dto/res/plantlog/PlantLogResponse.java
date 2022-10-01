@@ -1,8 +1,8 @@
-package com.plantity.server.dto.res.plantlog;
+package com.plantity.server.domain.dto.res.plantlog;
 
 import com.plantity.server.constants.SuccessCode;
 import com.plantity.server.domain.plantlog.MyPlantLogResponseDto;
-import com.plantity.server.dto.BaseResponse;
+import com.plantity.server.domain.dto.BaseResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;

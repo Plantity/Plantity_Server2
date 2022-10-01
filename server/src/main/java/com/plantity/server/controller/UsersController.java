@@ -1,10 +1,7 @@
 package com.plantity.server.controller;
 
-import com.plantity.server.config.BaseResponse2;
 import com.plantity.server.domain.users.Users;
 import com.plantity.server.domain.users.UsersRequestDto;
-import com.plantity.server.domain.users.UsersResponseDto;
-import com.plantity.server.dto.res.users.UserResponse;
 import com.plantity.server.repository.UsersRepository;
 import com.plantity.server.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
-
-import static com.plantity.server.constants.SuccessCode.USER_INFO_SUCCESS;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,6 +39,7 @@ public class UsersController {
     @ResponseBody
     @GetMapping("/login/kakao")
     public void kakaoCallback(@RequestParam String code) {
+
         // kakao 로그인시 발급되는 code
         // usersService의 getKakaoAccessToken(code)에 인수로 전달 -> accessToken 발급
         System.out.println("controller code :" + code);
