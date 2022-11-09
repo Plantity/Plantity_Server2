@@ -4,19 +4,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class MyPlantLogResponseDto {
 
+    private Long plantId;
     private boolean water;
     private boolean look;
     private boolean sun;
     private boolean repot;
 
     private MyPlantLogResponseDto(PlantLog plantLog) {
+        this.plantId = plantLog.getPlantId();
         this.water = plantLog.waterInfo(water);
-        this.look = plantLog.waterInfo(look);
-        this.sun = plantLog.waterInfo(sun);
-        this.repot = plantLog.waterInfo(repot);
+        this.look = plantLog.lookInfo(look);
+        this.sun = plantLog.sunInfo(sun);
+        this.repot = plantLog.repotInfo(repot);
     }
 
     public static MyPlantLogResponseDto from(PlantLog plantLog){
