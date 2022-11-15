@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @RestController
@@ -46,6 +47,7 @@ public class MyPlantApiController {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
+    /*
     @PostMapping("/save/{userId}")
     public ResponseEntity<MyPlantSaveResponse> save(@RequestPart(value="image", required=false)  MultipartFile multipartFile,@RequestPart(value = "myPlantSaveRequestDto") MyPlantSaveRequestDto myPlantSaveRequestDto, @PathVariable Long userId) throws IOException {
         try{
@@ -61,14 +63,43 @@ public class MyPlantApiController {
             objectMetadata.setContentType(contentType);
             amazonS3.putObject(bucket, filePath, multipartFile.getInputStream(), objectMetadata);
 
-            /*
-            if (myPlantSaveRequestDto.getPlantName() == null | myPlantSaveRequestDto.getPlantType() == null) {
-                throw new CustomException(ExceptionCode.NO_REQUIRED_PARAMETER);
-            }
-             */
             Users users1  = new Users(usersRepository.findByUserId(userId));
 
             MyPlant myPlant = new MyPlant(myPlantSaveRequestDto.getPlantName(),myPlantSaveRequestDto.getPlantAdaptTime(),myPlantSaveRequestDto.getPlantType(), amazonS3.getUrl(bucket, filePath).toString(), users1);
+
+            //myPlantService.save(myPlantSaveRequestDto);
+            myPlantRepository.save(myPlant);
+        }catch (Exception exception){
+            logger.error("Error!", exception);
+        }
+
+        return MyPlantSaveResponse.newResponse(CREATE_MYPLANT_SUCCESS);
+    }
+     */
+
+    @PostMapping("/save/{userId}")
+    public ResponseEntity<MyPlantSaveResponse> save(
+            @RequestPart(value="image", required=false)  MultipartFile multipartFile,
+            @RequestPart(value = "plantName") String plantName,
+            @RequestPart(value = "plantAdaptTime") String plantAdaptTime,
+            @RequestPart(value = "plantType") String plantType,
+            @PathVariable Long userId) throws IOException {
+        try{
+            String oriFileName = multipartFile.getOriginalFilename();
+            String fileName = oriFileName;
+            String filePath = "postImg/" + fileName;
+            Long fileSize = multipartFile.getSize();
+            String contentType = multipartFile.getContentType();
+
+            // S3 이미지 삽입
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentLength(fileSize);
+            objectMetadata.setContentType(contentType);
+            amazonS3.putObject(bucket, filePath, multipartFile.getInputStream(), objectMetadata);
+
+            Users users1  = new Users(usersRepository.findByUserId(userId));
+
+            MyPlant myPlant = new MyPlant(plantName,plantAdaptTime,plantType, amazonS3.getUrl(bucket, filePath).toString(), users1);
 
             //myPlantService.save(myPlantSaveRequestDto);
             myPlantRepository.save(myPlant);
