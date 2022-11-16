@@ -23,16 +23,16 @@ public class Log {
     }
 
     public boolean waterInfo(Boolean water) {
-        return this.water = water;
+        return this.water;
     }
     public boolean lookInfo(Boolean look) {
-        return this.look = look;
+        return this.look;
     }
     public boolean sunInfo(Boolean sun) {
-        return this.sun = sun;
+        return this.sun;
     }
     public boolean repotInfo(Boolean repot) {
-        return this.repot = repot;
+        return this.repot;
     }
 
 
