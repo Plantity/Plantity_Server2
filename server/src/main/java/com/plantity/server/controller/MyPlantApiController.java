@@ -5,17 +5,22 @@ import static com.plantity.server.constants.SuccessCode.*;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.plantity.server.config.BaseResponse2;
+import com.plantity.server.constants.ExceptionCode;
 import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.myPlant.MyPlantRequestDto;
 import com.plantity.server.domain.myPlant.MyPlantResponseDto;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
+import com.plantity.server.domain.plantlog.DateMyPlantLogResponseDto;
 import com.plantity.server.domain.plantlog.MyPlantLogRequestDto;
 import com.plantity.server.domain.plantlog.MyPlantLogResponseDto;
 import com.plantity.server.domain.users.Users;
+import com.plantity.server.dto.req.DateMyPlantLogRequestDto;
 import com.plantity.server.dto.res.myplant.MyPlantResponse;
 import com.plantity.server.dto.res.myplant.MyPlantSaveResponse;
 import com.plantity.server.dto.res.myplant.MyPlantUpdateResponse;
+import com.plantity.server.dto.res.plantlog.DatePlantLogResponse;
 import com.plantity.server.dto.res.plantlog.PlantLogResponse;
+import com.plantity.server.exception.CustomException;
 import com.plantity.server.repository.MyPlantRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import com.plantity.server.repository.UsersRepository;
@@ -24,12 +29,16 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -115,6 +124,7 @@ public class MyPlantApiController {
     }
 
     // 식물 로그 상세 조회
+    /*
     @GetMapping("/plantLog/{userId}/{myPlantId}/{plantLogId}")
     public ResponseEntity<PlantLogResponse> plantLogInfo(@PathVariable Long userId, @PathVariable Long myPlantId, @PathVariable Long plantLogId) {
 
@@ -123,5 +133,17 @@ public class MyPlantApiController {
         MyPlantLogResponseDto myPlantLogResponseDto = myPlantService.plantLogInfo(myPlantLogRequestDto);
 
         return PlantLogResponse.newResponse(PLANTLOG_INFO_SUCCESS, myPlantLogResponseDto);
+    }
+     */
+
+    // 각 날짜별 식물 로그 조회
+    @PostMapping("/plantLog")
+    public ResponseEntity<DatePlantLogResponse> datePlantLogInfo(@RequestBody DateMyPlantLogRequestDto requestDto) {
+
+        if(requestDto.getLogDate() == null) {
+            throw new CustomException(ExceptionCode.NO_REQUIRED_PARAMETER);
+        }
+        DateMyPlantLogResponseDto dateMyPlantLogResponseDto = myPlantService.datePlantLog(requestDto);
+        return DatePlantLogResponse.newResponse(PLANTLOG_INFO_SUCCESS, dateMyPlantLogResponseDto);
     }
 }

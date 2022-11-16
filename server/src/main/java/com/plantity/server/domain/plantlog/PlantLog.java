@@ -1,5 +1,6 @@
 package com.plantity.server.domain.plantlog;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.plantity.server.domain.BaseTimeEntity;
 import com.plantity.server.domain.myPlant.MyPlant;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Getter
@@ -33,11 +35,17 @@ public class PlantLog extends BaseTimeEntity {
     @Embedded
     private Log log;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate logDate; //식물로그날짜
+
+    private Long userIdx;
+
     @Builder
-    public PlantLog(Long plantId, MyPlant myPlant, Log log) {
+    public PlantLog(Long userIdx, Long plantId, LocalDate logDate) {
+        this.userIdx = userIdx;
         this.plantId = plantId;
-        this.myPlant = myPlant;
-        this.log = log;
+        //this.log = log;
+        this.logDate = logDate;
     }
 
     public boolean waterInfo(Boolean water) {

@@ -22,11 +22,12 @@ public class PlantLogSaveRequestDto {
         this.log = log;
     }
 
+    /*
     public PlantLog toEntity() {
         return PlantLog.builder()
                 .plantId(userId)
-                .myPlant(myPlant)
                 .log(log)
                 .build();
     }
+     */
 }
