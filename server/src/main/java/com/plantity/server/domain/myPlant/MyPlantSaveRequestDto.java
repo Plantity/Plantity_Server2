@@ -16,10 +16,10 @@ public class MyPlantSaveRequestDto {
     private String plantType; //타입
     private String filePath;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate plantAdaptTime; //입양날짜
+    private String plantAdaptTime; //입양날짜
 
     @Builder
-    public MyPlantSaveRequestDto(String plantName, String plantType, String filePath, LocalDate plantAdaptTime) {
+    public MyPlantSaveRequestDto(String plantName, String plantType, String filePath, String plantAdaptTime) {
 
         //식물이름, 타입, 이미지, 입양날짜
         this.plantName = plantName; //식물이름
