@@ -38,17 +38,19 @@ public class MyPlant extends BaseTimeEntity {
     private String plantName;  //식물이름
     private String plantType;  //식물타입
     private String filePath;
+    private String plantNickName; // 식물 별명
     private Long userIdx;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String plantAdaptTime; //식물입양날짜
 
     @Builder
-    public MyPlant(String plantName, String plantAdaptTime, String plantType, String filePath, Users users) {
+    public MyPlant(String plantName, String plantNickName, String plantAdaptTime, String plantType, String filePath, Users users) {
         this.plantName = plantName;
         this.plantType = plantType;
         this.filePath = filePath;
         this.plantAdaptTime = plantAdaptTime;
+        this.plantNickName = plantNickName;
         this.userIdx = users.getUserId();
     }
 }

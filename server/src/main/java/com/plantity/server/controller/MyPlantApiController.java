@@ -59,6 +59,7 @@ public class MyPlantApiController {
     public ResponseEntity<MyPlantSaveResponse> save(
             @RequestPart(value="image", required=false)  MultipartFile multipartFile,
             @RequestPart(value = "plantName") String plantName,
+            @RequestPart(value = "plantNickName") String plantNickName,
             @RequestPart(value = "plantAdaptTime") String plantAdaptTime,
             @RequestPart(value = "plantType") String plantType,
             @PathVariable Long userId) throws IOException {
@@ -77,7 +78,7 @@ public class MyPlantApiController {
 
             Users users1  = new Users(usersRepository.findByUserId(userId));
 
-            MyPlant myPlant = new MyPlant(plantName,plantAdaptTime,plantType, amazonS3.getUrl(bucket, filePath).toString(), users1);
+            MyPlant myPlant = new MyPlant(plantName,plantNickName, plantAdaptTime,plantType, amazonS3.getUrl(bucket, filePath).toString(), users1);
 
             //myPlantService.save(myPlantSaveRequestDto);
             myPlantRepository.save(myPlant);
