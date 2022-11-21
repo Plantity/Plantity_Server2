@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MyPlantResponseDto {
 
+    private String plantId;
     private String plantName;
+    private String plantNickName;
     private String filePath;
     private Long userId;
     private PlantLog plantLog;
