@@ -10,6 +10,7 @@ import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.myPlant.MyPlantRequestDto;
 import com.plantity.server.domain.myPlant.MyPlantResponseDto;
 import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
+import com.plantity.server.domain.plant.detail.PlantDetail;
 import com.plantity.server.domain.plantlog.DateMyPlantLogResponseDto;
 import com.plantity.server.domain.plantlog.MyPlantLogRequestDto;
 import com.plantity.server.domain.plantlog.MyPlantLogResponseDto;
@@ -22,6 +23,7 @@ import com.plantity.server.dto.res.plantlog.DatePlantLogResponse;
 import com.plantity.server.dto.res.plantlog.PlantLogResponse;
 import com.plantity.server.exception.CustomException;
 import com.plantity.server.repository.MyPlantRepository;
+import com.plantity.server.repository.PlantDetailRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import com.plantity.server.repository.UsersRepository;
 import com.plantity.server.service.MyPlantService;
@@ -51,12 +53,14 @@ public class MyPlantApiController {
     private final PlantLogRepository plantLogRepository;
     private final MyPlantRepository myPlantRepository;
     private final UsersRepository usersRepository;
+    private final PlantDetailRepository plantDetailRepository;
 
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
     @PostMapping("/save/{userId}")
     public ResponseEntity<MyPlantSaveResponse> save(
+            @RequestParam String cntntsNo,
             @RequestPart(value="image", required=false)  MultipartFile multipartFile,
             @RequestPart(value = "plantName") String plantName,
             @RequestPart(value = "plantNickName") String plantNickName,
@@ -64,6 +68,11 @@ public class MyPlantApiController {
             @RequestPart(value = "plantType") String plantType,
             @PathVariable Long userId) throws IOException {
         try{
+            // cntntsNo로 해당 식물의 관수 설명도 함께 myPlant에 저장
+            PlantDetail plantDetail = new PlantDetail(plantDetailRepository.findByCntntsNo(cntntsNo)); // 식물 찾기
+            String watercycleSprngCodeNm= plantDetail.getWatercycleSprngCodeNm(); // 관수설명 찾기
+
+
             String oriFileName = multipartFile.getOriginalFilename();
             String fileName = oriFileName;
             String filePath = "postImg/" + fileName;
@@ -78,7 +87,7 @@ public class MyPlantApiController {
 
             Users users1  = new Users(usersRepository.findByUserId(userId));
 
-            MyPlant myPlant = new MyPlant(plantName,plantNickName, plantAdaptTime,plantType, amazonS3.getUrl(bucket, filePath).toString(), users1);
+            MyPlant myPlant = new MyPlant(plantName,plantNickName, plantAdaptTime,plantType, amazonS3.getUrl(bucket, filePath).toString(), watercycleSprngCodeNm, users1);
 
             //myPlantService.save(myPlantSaveRequestDto);
             myPlantRepository.save(myPlant);
