@@ -68,7 +68,6 @@ public class MyPlantApiController {
             @RequestPart(value = "plantName") String plantName,
             @RequestPart(value = "plantNickName") String plantNickName,
             @RequestPart(value = "plantAdaptTime") String plantAdaptTime,
-            @RequestPart(value = "plantType") String plantType,
             @PathVariable Long userId) throws IOException {
 
         // cntntsNo 유효성 검사
@@ -96,7 +95,7 @@ public class MyPlantApiController {
 
             Users users1  = new Users(usersRepository.findByUserId(userId));
 
-            MyPlant myPlant = new MyPlant(plantName,plantNickName, plantAdaptTime,plantType, amazonS3.getUrl(bucket, filePath).toString(), watercycleSprngCodeNm, users1);
+            MyPlant myPlant = new MyPlant(plantName,plantNickName, plantAdaptTime,amazonS3.getUrl(bucket, filePath).toString(), watercycleSprngCodeNm, users1);
 
             myPlantRepository.save(myPlant);
         } catch (IOException e) {

@@ -35,8 +35,7 @@ public class MyPlant extends BaseTimeEntity {
     @OneToMany(mappedBy = "myPlant")
     private List<PlantLog> plantLog = new ArrayList<PlantLog>();
 
-    private String plantName;  //식물이름
-    private String plantType;  //식물타입
+    private String plantName;  //식물 타입
     private String filePath;
     private String plantNickName; // 식물 별명
     private String watercycleSprngCodeNm; // 관수코드
@@ -46,9 +45,8 @@ public class MyPlant extends BaseTimeEntity {
     private String plantAdaptTime; //식물입양날짜
 
     @Builder
-    public MyPlant(String plantName, String plantNickName, String plantAdaptTime, String plantType, String filePath, String watercycleSprngCodeNm, Users users) {
+    public MyPlant(String plantName, String plantNickName, String plantAdaptTime, String filePath, String watercycleSprngCodeNm, Users users) {
         this.plantName = plantName;
-        this.plantType = plantType;
         this.filePath = filePath;
         this.plantAdaptTime = plantAdaptTime;
         this.plantNickName = plantNickName;
