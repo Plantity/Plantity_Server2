@@ -10,15 +10,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MyPlantResponseDto {
 
+    private Long myPlantId;
     private String plantName;
+    private String plantNickName;
     private String filePath;
-    private Long userId;
-    private PlantLog plantLog;
+    //private PlantLog plantLog;
 
     private MyPlantResponseDto(MyPlant myPlant) {
         this.plantName = myPlant.getPlantName();
         this.filePath = myPlant.getFilePath();
-        this.userId = myPlant.getUserIdx();
+        this.myPlantId = myPlant.getMyPlantId();
+        this.plantNickName = myPlant.getPlantNickName();
     }
 
     public static MyPlantResponseDto from(MyPlant myPlant) {

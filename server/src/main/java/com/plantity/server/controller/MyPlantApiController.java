@@ -43,6 +43,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -128,15 +129,11 @@ public class MyPlantApiController {
         return MyPlantUpdateResponse.newResponse(UPDATE_LOOKPLANTLOG_SUCCESS);
     }
 
-    // myPlant 상세 정보 조회
-    @GetMapping("/plant/{userId}/{myPlantId}")
-    public ResponseEntity<MyPlantResponse> myPlantInfo(@PathVariable Long userId, @PathVariable Long myPlantId) {
-
-        MyPlantRequestDto myPlantRequestDto = MyPlantRequestDto.of(userId, myPlantId);
-
-        MyPlantResponseDto myPlantResponseDto = myPlantService.myPlantInfo(myPlantRequestDto);
-
-        return MyPlantResponse.newResponse(MYPLANT_INFO_SUCCESS, myPlantResponseDto);
+    // 내 식물 전체 리스트
+    @GetMapping("/{userId}")
+    public BaseResponse2<List<MyPlantResponseDto>> myPlantInfo(@PathVariable Long userId) {
+        List<MyPlantResponseDto> myPlantResponseDtos = myPlantRepository.findAllByUserIdx(userId);
+        return new BaseResponse2<>(myPlantResponseDtos);
     }
 
     // 식물 로그 상세 조회
