@@ -13,17 +13,17 @@ import java.time.LocalDateTime;
 public class MyPlantSaveRequestDto {
 
     private String plantName; //식물이름
-    private String plantType; //타입
+    private String plantNickName; //식물 별명
     private String filePath;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String plantAdaptTime; //입양날짜
 
     @Builder
-    public MyPlantSaveRequestDto(String plantName, String plantType, String filePath, String plantAdaptTime) {
+    public MyPlantSaveRequestDto(String plantName, String plantNickName, String filePath, String plantAdaptTime) {
 
         //식물이름, 타입, 이미지, 입양날짜
         this.plantName = plantName; //식물이름
-        this.plantType = plantType; //타입
+        this.plantNickName = plantNickName; //타입
         this.filePath = filePath; //이미지
         this.plantAdaptTime = plantAdaptTime; //입양날짜
     }
@@ -31,7 +31,7 @@ public class MyPlantSaveRequestDto {
     public MyPlant toEntity() {
         return MyPlant.builder()
                 .plantName(plantName)
-                .plantType(plantType)
+                .plantNickName(plantNickName)
                 .filePath(filePath)
                 .plantAdaptTime(plantAdaptTime)
                 .build();
