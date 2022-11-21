@@ -1,9 +1,12 @@
 package com.plantity.server.controller;
 
+import static com.plantity.server.config.BaseResponseStatus.*;
 import static com.plantity.server.constants.SuccessCode.*;
 
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.plantity.server.config.BaseException;
 import com.plantity.server.config.BaseResponse2;
 import com.plantity.server.constants.ExceptionCode;
 import com.plantity.server.domain.myPlant.MyPlant;
@@ -59,7 +62,7 @@ public class MyPlantApiController {
     public String bucket;
 
     @PostMapping("/save/{userId}")
-    public ResponseEntity<MyPlantSaveResponse> save(
+    public BaseResponse2<MyPlantSaveResponse> save(
             @RequestParam String cntntsNo,
             @RequestPart(value="image", required=false)  MultipartFile multipartFile,
             @RequestPart(value = "plantName") String plantName,
@@ -67,6 +70,12 @@ public class MyPlantApiController {
             @RequestPart(value = "plantAdaptTime") String plantAdaptTime,
             @RequestPart(value = "plantType") String plantType,
             @PathVariable Long userId) throws IOException {
+
+        // cntntsNo 유효성 검사
+        if(!plantDetailRepository.existsByCntntsNo(cntntsNo)){
+            return new BaseResponse2<>(POST_CNTNTSNO_INVALID);
+        }
+
         try{
             // cntntsNo로 해당 식물의 관수 설명도 함께 myPlant에 저장
             PlantDetail plantDetail = new PlantDetail(plantDetailRepository.findByCntntsNo(cntntsNo)); // 식물 찾기
@@ -89,13 +98,11 @@ public class MyPlantApiController {
 
             MyPlant myPlant = new MyPlant(plantName,plantNickName, plantAdaptTime,plantType, amazonS3.getUrl(bucket, filePath).toString(), watercycleSprngCodeNm, users1);
 
-            //myPlantService.save(myPlantSaveRequestDto);
             myPlantRepository.save(myPlant);
-        }catch (Exception exception){
-            logger.error("Error!", exception);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        return MyPlantSaveResponse.newResponse(CREATE_MYPLANT_SUCCESS);
+        return new BaseResponse2<>(POST_SUCCESS);
     }
 
     @PutMapping("/sun/{userId}/{myPlantId}")

@@ -10,7 +10,19 @@ public enum BaseResponseStatus {
     /**
      * 1000 : 요청 성공
      */
-    SUCCESS(true, 1000, "요청에 성공하였습니다.");
+    SUCCESS(true, 1000, "요청에 성공하였습니다."),
+    POST_SUCCESS(true, 1001, "식물 등록에 성공하였습니다"),
+
+    /**
+     * 2000: Request 오류
+     */
+    // post
+    POST_CNTNTSNO_INVALID(false, 2001, "cntntsNo가 유효하지 않습니다");
+
+    /**
+     * 3000: Response 오류
+     */
+
 
 
     private final boolean isSuccess;
