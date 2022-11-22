@@ -9,10 +9,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.plantity.server.config.BaseException;
 import com.plantity.server.config.BaseResponse2;
 import com.plantity.server.constants.ExceptionCode;
-import com.plantity.server.domain.myPlant.MyPlant;
-import com.plantity.server.domain.myPlant.MyPlantRequestDto;
-import com.plantity.server.domain.myPlant.MyPlantResponseDto;
-import com.plantity.server.domain.myPlant.MyPlantSaveRequestDto;
+import com.plantity.server.domain.myPlant.*;
 import com.plantity.server.domain.plant.detail.PlantDetail;
 import com.plantity.server.domain.plantlog.DateMyPlantLogResponseDto;
 import com.plantity.server.domain.plantlog.MyPlantLogRequestDto;
@@ -134,6 +131,13 @@ public class MyPlantApiController {
     public BaseResponse2<List<MyPlantResponseDto>> myPlantInfo(@PathVariable Long userId) {
         List<MyPlantResponseDto> myPlantResponseDtos = myPlantRepository.findAllByUserIdx(userId);
         return new BaseResponse2<>(myPlantResponseDtos);
+    }
+
+    // 내 식물 상세 보기
+    @GetMapping("/{userId}/{myPlantId}")
+    public BaseResponse2<MyPlantDetailRes> getMyPlantDetail(@PathVariable Long userId, @PathVariable Long myPlantId){
+        MyPlantDetailRes myPlantDetailRes = myPlantRepository.findByMyPlantId(myPlantId);
+        return new BaseResponse2<>(myPlantDetailRes);
     }
 
     // 식물 로그 상세 조회
