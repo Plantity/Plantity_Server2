@@ -136,6 +136,16 @@ public class MyPlantApiController {
     // 내 식물 상세 보기
     @GetMapping("/{userId}/{myPlantId}")
     public BaseResponse2<MyPlantDetailRes> getMyPlantDetail(@PathVariable Long userId, @PathVariable Long myPlantId){
+        // 유저 아이디 유효성 검사
+        if(!usersRepository.existsByUserId(userId)){
+            return new BaseResponse2<>(USER_ID_INVALID);
+        }
+
+        // 식물 아이디 유효성 검사
+        if(!myPlantRepository.existsByMyPlantId(myPlantId)){
+            return new BaseResponse2<>(MYPLANT_ID_INVALID);
+        }
+
         MyPlantDetailRes myPlantDetailRes = myPlantRepository.findByMyPlantId(myPlantId);
         return new BaseResponse2<>(myPlantDetailRes);
     }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface MyPlantRepository extends JpaRepository<MyPlant, Long> {
     List<MyPlantResponseDto> findAllByUserIdx(Long userId);
     MyPlantDetailRes findByMyPlantId(Long myPlantId);
+    Boolean existsByMyPlantId(Long myPlantId);
 }

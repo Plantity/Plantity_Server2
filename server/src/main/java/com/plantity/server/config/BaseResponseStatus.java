@@ -17,7 +17,13 @@ public enum BaseResponseStatus {
      * 2000: Request 오류
      */
     // post
-    POST_CNTNTSNO_INVALID(false, 2001, "cntntsNo가 유효하지 않습니다");
+    POST_CNTNTSNO_INVALID(false, 2001, "cntntsNo가 유효하지 않습니다"),
+
+    // user
+    USER_ID_INVALID(false, 2010, "해당 유저가 없습니다"),
+
+    // myPlant
+    MYPLANT_ID_INVALID(false, 2015, "해당 식물이 없습니다");
 
     /**
      * 3000: Response 오류
