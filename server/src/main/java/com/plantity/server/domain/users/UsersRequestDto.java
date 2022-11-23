@@ -2,20 +2,52 @@ package com.plantity.server.domain.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class UsersRequestDto {
 
-    private String userId;
-    private String social;
-    private String nickName;
-    private String rating;
-    private int score;
+
+    private String nickname;
+
+    private String socialType; //kakao
+
+    private String userId; //id
+
+
+
+    @Getter
+    @Setter
+    public static class SignUpDto{
+        private String socialType;
+
+        private String socialToken;
+
+        private String nickname;
+    }
+
+    @Getter
+    public static class ProfileDto {
+        private String nickname;
+
+        private Integer score;
+
+        public ProfileDto(Users user){
+            nickname = user.getNickname();
+            score = user.getScore();
+        }
+    }
+
+
 
     private UsersRequestDto(String userId){
         this.userId = userId;
@@ -25,31 +57,15 @@ public class UsersRequestDto {
         return new UsersRequestDto(userId);
     }
 
-    @Getter
-    @Setter
-    public static class SignupDto {
-        @NotNull
-        @JsonProperty("social_token")
-        private String socialToken;
-
-        @NotNull
-        @JsonProperty("social_type")
-        private String socialType;
-
-        private String nickName;
-        private String social;
-    }
 
     @Getter
     @Setter
     public static class SigninDto{
 
         @NotNull
-        @JsonProperty("social_type")
         private String socialType;
 
         @NotNull
-        @JsonProperty("social_token")
         private String socialToken;
     }
 }

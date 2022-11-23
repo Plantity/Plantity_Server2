@@ -10,7 +10,15 @@ import java.util.Optional;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, String> {
+    Optional<Users> findBySocialTypeAndUserId(String socialType, String userId);
+    //token, type 둘다 충족하는 회원을 조회하는 메소드 추가
 
-    Optional<Users> findBySocial(String social);
-    public Users findByUserId(String id);
+    Optional<Users> findByUserId(String userId);
+
+//    boolean existsByNickname(String nickname);
+//
+//    Optional<Users> findByNickname(String nickname);
+//
+//    boolean existsBySocialId(String socialId);
+
 }

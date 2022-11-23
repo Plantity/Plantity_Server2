@@ -14,7 +14,7 @@ public class UsersResponseDto {
 
     private UsersResponseDto(Users users) {
         this.social = users.getSocial();
-        this.nickName = users.getNickName();
+        this.nickName = users.getNickname();
         this.rating = users.getRating();
         this.score = users.getScore();
     }
