@@ -13,6 +13,7 @@ public class MyPlantResponseDto {
     private Long myPlantId;
     private String plantName;
     private String plantNickName;
+    private String plantAdaptTime;
     private String filePath;
     //private PlantLog plantLog;
 
@@ -21,6 +22,7 @@ public class MyPlantResponseDto {
         this.filePath = myPlant.getFilePath();
         this.myPlantId = myPlant.getMyPlantId();
         this.plantNickName = myPlant.getPlantNickName();
+        this.plantAdaptTime = myPlant.getPlantAdaptTime();
     }
 
     public static MyPlantResponseDto from(MyPlant myPlant) {
