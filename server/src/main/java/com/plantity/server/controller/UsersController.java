@@ -29,13 +29,9 @@ public class UsersController {
 
     // user 상세 정보 조회
     @GetMapping("/users/{userId}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
-
-        UsersRequestDto usersRequestDto = UsersRequestDto.of(userId);
-
-        UsersResponseDto usersResponseDto = userService.userInfo(usersRequestDto);
-
-        return UserResponse.newResponse(USER_INFO_SUCCESS, usersResponseDto);
+    public BaseResponse2<UsersResponseDto> getUser(@PathVariable Long userId) {
+        UsersResponseDto usersResponseDto = UsersResponseDto.from(userRepository.findByUserId(userId));
+        return new BaseResponse2<>(usersResponseDto);
     }
 
     // 임시로 User 추가하기
