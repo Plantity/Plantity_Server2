@@ -59,6 +59,7 @@ public class MyPlantApiController {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
 
+    // 내 식물 등록하기
     @PostMapping("/save/{userId}")
     public BaseResponse2<MyPlantSaveResponse> save(
             @RequestParam String cntntsNo,
