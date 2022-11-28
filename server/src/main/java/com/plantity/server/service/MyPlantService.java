@@ -3,15 +3,13 @@ package com.plantity.server.service;
 import com.plantity.server.domain.myPlant.MyPlant;
 import com.plantity.server.domain.myPlant.MyPlantRequestDto;
 import com.plantity.server.domain.myPlant.MyPlantResponseDto;
-import com.plantity.server.domain.plantlog.DateMyPlantLogResponseDto;
-import com.plantity.server.domain.plantlog.MyPlantLogRequestDto;
-import com.plantity.server.domain.plantlog.MyPlantLogResponseDto;
-import com.plantity.server.domain.plantlog.PlantLog;
+import com.plantity.server.domain.plantlog.*;
 import com.plantity.server.dto.req.DateMyPlantLogRequestDto;
 import com.plantity.server.dto.res.plantlog.DatePlantLogResponse;
 import com.plantity.server.repository.MyPlantRepository;
 import com.plantity.server.repository.PlantLogRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +47,7 @@ public class MyPlantService {
 
     @Transactional
     public DateMyPlantLogResponseDto datePlantLog(DateMyPlantLogRequestDto requestDto) {
+
         PlantLog plantLog = plantLogRepository.findById(requestDto.getPlantId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 날짜에 로그가 없습니다.")
         );

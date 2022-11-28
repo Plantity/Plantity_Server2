@@ -8,6 +8,7 @@ import com.plantity.server.domain.users.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class PlantLog extends BaseTimeEntity {
         //this.log = log;
         this.logDate = logDate;
     }
+
 
     public boolean waterInfo(Boolean water) {
         return log.waterInfo(water);

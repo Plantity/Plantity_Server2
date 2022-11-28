@@ -1,6 +1,7 @@
 package com.plantity.server.domain.plantlog;
 
 import lombok.Getter;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.persistence.Embeddable;
 
@@ -20,6 +21,15 @@ public class Log {
         this.look = look;
         this.sun = sun;
         this.repot = repot;
+    }
+
+    //@Scheduled(cron = "0 01 00 * * *")
+    @Scheduled(cron = "* /1 * * * *")
+    public void cte_column() {
+        this.water = false;
+        this.look = false;
+        this.sun = false;
+        this.repot = false;
     }
 
     public boolean waterInfo(Boolean water) {
