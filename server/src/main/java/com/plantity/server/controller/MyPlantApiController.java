@@ -103,25 +103,29 @@ public class MyPlantApiController {
         return new BaseResponse2<>(POST_SUCCESS);
     }
 
+    // 광합성
     @PutMapping("/sun/{userId}/{myPlantId}")
     public ResponseEntity<MyPlantUpdateResponse> putSun(@PathVariable Long userId, @PathVariable Long myPlantId) {
         myPlantService.updateSun(userId, myPlantId);
         return MyPlantUpdateResponse.newResponse(UPDATE_SUNPLANTLOG_SUCCESS);
     }
 
+    // 분갈이
     @PutMapping("/repot/{userId}/{myPlantId}")
-    public BaseResponse2<String> putRepot(@PathVariable Long userId, @PathVariable Long myPlantId){
+    public ResponseEntity<MyPlantUpdateResponse> putRepot(@PathVariable Long userId, @PathVariable Long myPlantId){
         myPlantService.updateRepot(userId, myPlantId);
-        return new BaseResponse2("success");
+        return MyPlantUpdateResponse.newResponse(UPDATE_REPOTPLANTLOG_SUCCESS);
     }
 
+    // 물 주기
     @PutMapping("/water/{userId}/{myPlantId}")
     public ResponseEntity<MyPlantUpdateResponse> putWater(@PathVariable Long userId, @PathVariable Long myPlantId) {
         myPlantService.updateWater(userId, myPlantId);
         return MyPlantUpdateResponse.newResponse(UPDATE_WATERPLANTLOG_SUCCESS);
     }
 
-    @PutMapping("look/{userId}/{myPlantId}")
+    // 관찰
+    @PutMapping("/look/{userId}/{myPlantId}")
     public ResponseEntity<MyPlantUpdateResponse> putLook(@PathVariable Long userId, @PathVariable Long myPlantId) {
         myPlantService.updateLook(userId, myPlantId);
         return MyPlantUpdateResponse.newResponse(UPDATE_LOOKPLANTLOG_SUCCESS);

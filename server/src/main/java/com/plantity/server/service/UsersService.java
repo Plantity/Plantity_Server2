@@ -30,6 +30,7 @@ public class UsersService {
         Users users = userRepository.findById(requestDto.getUserId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 유저가 없습니다.")
         );
+        users.checkRating();
 
         return UsersResponseDto.from(users);
 

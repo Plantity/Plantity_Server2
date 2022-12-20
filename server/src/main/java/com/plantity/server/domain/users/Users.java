@@ -28,12 +28,15 @@ public class Users extends BaseTimeEntity {
     private int score;
     //private String status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<MyPlant> myPlant = new ArrayList<MyPlant>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<PlantLog> plantLogs = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<PlantFollowing> plantFollowings = new ArrayList<PlantFollowing>();
 
@@ -54,4 +57,36 @@ public class Users extends BaseTimeEntity {
         //this.status = usersRequestDto.getStatus();
     }
 
+    // 광합성
+    public void updateSun(){
+        score += 5;
+        checkRating();
+    }
+
+    // 분갈이
+    public void updateRepot(){
+        score += 20;
+        checkRating();
+    }
+
+    // 물 주기
+    public void updateWater(){
+        score += 3;
+        checkRating();
+    }
+
+    // 관찰
+    public void updateLook(){
+        score += 2;
+        checkRating();
+    }
+
+    public void checkRating(){
+        if(score <= 30)
+            rating = "비기너";
+        else if(score <= 100)
+            rating = "가드너";
+        else
+            rating = "마스터";
+    }
 }
